@@ -1,3 +1,7 @@
+lgy:direction
+fx:super block file
+cy:inode
+https://www.cnblogs.com/linux-xin/p/8126999.html
 1.1超级块类
 类名称：super_block
 中文含义：超级块
