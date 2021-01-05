@@ -1,5 +1,5 @@
-lgy:direction
-fx:super block file
+lgy:file
+fx:super block direction
 cy:inode
 https://www.cnblogs.com/linux-xin/p/8126999.html
 1.1超级块类
