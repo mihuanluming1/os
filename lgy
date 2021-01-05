@@ -1,1 +1,8 @@
-hello
+class dir_block {
+
+    String name;// 文件或目录名
+    short i_num;// i结点号
+public dir_block(String str, short num) {
+        name = str;
+        i_num = num;
+}
