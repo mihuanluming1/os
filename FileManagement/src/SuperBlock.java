@@ -1,41 +1,30 @@
 
 public class SuperBlock {
-	private static DataBlock[] datablock = new DataBlock[10];
-	private static Inode[] inode= new Inode[10];
+	private static dataBlockNum=10;
+	private static InodeNum=10;
+	private static DataBlock[] datablock = new DataBlock[dataBlockNum];
+	private static Inode[] inode= new Inode[InodeNum];
 	private boolean dirty = false;
-	static int[] InodeNum = {0,0,0,0,0,0,0,0,0,0}; 
-	static int[] DataBlockNum = {0,0,0,0,0,0,0,0,0,0}; 
-	static int[] GetInodeNum()//»ñµÃË÷Òı·ÖÅä×´Ì¬
-	{ 
-		return InodeNum;
+	static Inode InodeAllocation(int inodeNum) {//ç´¢å¼•åˆ†é…,è¯¥ç´¢å¼•å·è‹¥æœªåˆ†é…ï¼Œè¿›è¡Œåˆ†é…ï¼Œè‹¥å·²åˆ†é…ï¼Œè¿”å›false
+
 	}
-	static int[]  GetDataBlockNum()//»ñµÃÊı¾İ¿é·ÖÅä×´Ì¬
-	{ 
-		return DataBlockNum;
+	static  DataBlock DataBlockAllocation(char[] cotent) {//æ•°æ®å—åˆ†é…,DataBlockNumæ˜¯åˆ†é…å‡ºå»çš„æ•°æ®å—åºå· 
+			
 	}
-	static boolean InodeAllocation(int inodeNum) {//Ë÷Òı·ÖÅä,¸ÃË÷ÒıºÅÈôÎ´·ÖÅä£¬½øĞĞ·ÖÅä£¬ÈôÒÑ·ÖÅä£¬·µ»Øfalse
-		if(InodeNum[inodeNum]==0)
-		{
-			InodeNum[inodeNum]=1;
-			return true;
-		}
-		else
-			return false;
-	}
-	static boolean DataBlockAllocation(int dataBlockNum,char[] cotent) {//Êı¾İ¿é·ÖÅä,DataBlockNumÊÇ·ÖÅä³öÈ¥µÄÊı¾İ¿éĞòºÅ
-		if(DataBlockNum[dataBlockNum]==0)
-		{
-			DataBlockNum[dataBlockNum]=1;
-			dataBlock[dataBlockNum].array=cotent;
-			return true;
-		}
-		else
-			return false;
-	}
-	static void DeleteInode(int InodeNum)//Í¨¹ıË÷ÒıºÅÉ¾³ıÎÄ¼ş£¬Çå³ıÄ¿Â¼ÖĞÏÂµÄÎÄ¼ş£¬ÓÉÄ¿Â¼Ìá³öÇëÇó
+	static void DeleteInode(int InodeNum)//é€šè¿‡ç´¢å¼•å·åˆ é™¤æ–‡ä»¶ï¼Œæ¸…é™¤ç›®å½•ä¸­ä¸‹çš„æ–‡ä»¶ï¼Œç”±ç›®å½•æå‡ºè¯·æ±‚
 	{
 		
 	}
 	
+	
+}
+class DataBlock{
+    	int DataBlockCount;
+    	char [] content=new char[10];
+    	DataBlock next;
+    	DataBlock (){
+	    	next=null;
+		DataBlockCount=0;
+	}
 	
 }
