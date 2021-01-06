@@ -1,0 +1,6 @@
+
+public class Inode {
+	Inode(){
+	
+	}
+}
