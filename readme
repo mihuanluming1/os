@@ -1,0 +1,41 @@
+lgy:file
+fx:super block direction
+cy:inode
+https://www.cnblogs.com/linux-xin/p/8126999.html
+1.1超级块类
+类名称：super_block
+中文含义：超级块
+类结构：class super_block {
+
+    short inode_counts;// i结点数
+    short logic_counts;// 逻辑块数
+int maxFileLength;// 最大文件长度
+short logic_length;//逻辑块长度
+}
+功能描述：记录文件系统结构信息。
+1.2 i结点类
+类名称：inode
+中文含义：i结点
+类结构：class inode {
+
+    byte i_mode;// 文件类型
+    short i_num;// i结点号
+    int i_size;// 文件长度
+    String username;// 用户名
+    Date c_time;// 创建时间
+    Date m_time;// 最后一次修改时间
+    short[] i_zone = new short[9];// 磁盘序列表
+}
+功能描述：记录文件或目录的属性及数据存储位置。
+1.3目录类
+类名称：dir_block
+中文字段：目录项
+类结构：class dir_block {
+
+    String name;// 文件或目录名
+    short i_num;// i结点号
+public dir_block(String str, short num) {
+        name = str;
+        i_num = num;
+}
+   功能描述：将文件或目录名和入口地址对应起来。
