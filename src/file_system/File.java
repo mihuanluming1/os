@@ -1,4 +1,4 @@
-package 操作系统课程实践;
+package file_system;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -20,7 +20,7 @@ public class File {//文件类
 		fileName = fileNamea;
 		fileList = null;
 		fileInode = SuperBlock.InodeAllocation();
-		if(fileInode = null) {
+		if(fileInode == null) {
 			//报错
 		}
 		// TODO 自动生成的构造函数存根

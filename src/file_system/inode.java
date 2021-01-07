@@ -1,4 +1,4 @@
-package 文件系统;
+package file_system;
 
 class Inode {
       int inodeNum;// 索引号
@@ -12,7 +12,7 @@ class Inode {
     }
    void write(String fileContenta){
 	    int x=0;  //偏移参数		
-		datablock=SuperBlock.dataBlockAllocation();
+		datablock=SuperBlock.DataBlockAllocation();
 		datablock.write(fileContenta, x);
 		inodeFlag=1;// 已经被使用
     }
