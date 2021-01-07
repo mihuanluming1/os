@@ -27,6 +27,7 @@ public class dentryButton extends JButton {
 				}
 				else if (e.getButton()==e.BUTTON1) {
 					//open()
+					gridJPanel.showFile(currentDentry);
 				}
 			}
 		});

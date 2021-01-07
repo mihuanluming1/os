@@ -19,8 +19,8 @@ public class DetailJPanel extends JPanel{
 	void initialAll(Dentry currentDentry) {
 		setLayout(null);
 		setBounds(0, 0, 700, 700);
-		initialGridJPanel(currentDentry);
 		initialJTextField(currentDentry);
+		initialGridJPanel(currentDentry,addressField);
 		setVisible(true);
 	}
 	private void initialJTextField(Dentry currentDentry) {
@@ -32,9 +32,9 @@ public class DetailJPanel extends JPanel{
 		add(addressField);
 		
 	}
-	void initialGridJPanel(Dentry currentDentry) {
+	void initialGridJPanel(Dentry currentDentry, JTextField addressField) {
 		
-		gridJPanel=new GridJPanel(currentDentry);
+		gridJPanel=new GridJPanel(currentDentry,addressField);
 		JScrollPane jsp = new JScrollPane(gridJPanel);
         jsp.setBounds(50, 65, 620, 600);
         jsp.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

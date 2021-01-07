@@ -7,13 +7,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class GridJPanel extends JPanel{
 	//GridLayout gridLayout=new GridLayout(6, 6, 20, 20);
 	int fileNum;
 	int dentryNum;
 	MyJPopupMenu jPopupMenu;
-	public GridJPanel(Dentry currentDentry) {
+	JTextField addressField;
+	public GridJPanel(Dentry currentDentry, JTextField addressField) {
 		// TODO 自动生成的构造函数存根
 		super();
 		setBackground(Color.white);
@@ -21,6 +23,14 @@ public class GridJPanel extends JPanel{
 		setLayout(null);
 		fileNum=0;
 		dentryNum=0;
+		this.addressField=addressField;
+		showFile(currentDentry);
+	}
+	void setAddressTest(Dentry currentDentry){
+		addressField.setText(currentDentry.getFullPath().toString());
+	}
+	void showFile(Dentry currentDentry){
+		removeAll();
 		jPopupMenu=new MyJPopupMenu(2,currentDentry,this);
 		addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e)
@@ -30,11 +40,8 @@ public class GridJPanel extends JPanel{
 				}
 			}
 		});
-		showFile(currentDentry);
-	}
-	void showFile(Dentry currentDentry){
-		removeAll();
 		int height=600;
+		setAddressTest(currentDentry);
 		dentryNum=currentDentry.getChildDentryNum();
 		fileNum=currentDentry.getFileNum();
 		int num=dentryNum+fileNum;
