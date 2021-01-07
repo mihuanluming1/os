@@ -1,26 +1,27 @@
-
 public class SuperBlock {
+
 	private static DataBlock[] dataBlock = new DataBlock[10];
-	private static Inode[] inode = new Inode[10];
-	private boolean dirty = false;//ÔàÎ»£¬ÄÚ´æÖĞµÄÊı¾İÊÇ·ñ±»¸Ä±äµÄ±êÖ¾
-	static Inode InodeAllocation() {
+	private static Inode[] inode= new Inode[10];
+	private boolean dirty = false;//è„ä½ä¸ºçœŸæ—¶éœ€è¦å†™å›ç£ç›˜ï¼›ä¸ºå‡æ—¶è¯´æ˜å†…å­˜ä¸­æ–‡ä»¶æ²¡æœ‰è¢«æ”¹å˜ï¼Œä¸éœ€è¦å†™å›ç£ç›˜
+	static Inode InodeAllocation() {//ç´¢å¼•åˆ†é…
 		for(int i=0;i<10;i++)
-			if(inode[i].inodeFlag == 0) {
-				return inode[i]; 
+			if(inode[i].i_flag==0) {
+				return inode[i];
 			}		
-		return null;
+		return inode[0];
 	}
-	static DataBlock DataBlockAllocation() {//Êı¾İ¿é·ÖÅä,´æÔÚ¿ÕµÄÊı¾İ¿é·µ»Ø¸ÃÊı¾İ¿é¶ÔÏó
-		for(int i = 0;i < 10;i++)
-			if(dataBlock[i].dataBlockFlag == 0) {
+	static DataBlock DataBlockAllocation() {//æ•°æ®å—åˆ†é…,å­˜åœ¨ç©ºçš„æ•°æ®å—è¿”å›è¯¥æ•°æ®å—å¯¹è±¡
+		for(int i=0;i<10;i++)
+			if(dataBlock[i].d_flag==0) {
 				return dataBlock[i];
 			}
-		return null;
+		return dataBlock[0];
 	}
-	boolean getDirty() {//»ñÈ¡ÔàÎ»
+	boolean getDirty() {//è·å–è„ä½
 		return dirty;
 	}
-	void modifyDirty() {//ĞŞ¸ÄÔàÎ»
+	void modifyDirty() {//ä¿®æ”¹è„ä½
 		dirty = true;
-	}
+	}	
 }
+
