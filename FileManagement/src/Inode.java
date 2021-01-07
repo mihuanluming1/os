@@ -1,7 +1,7 @@
 
 public class Inode {
-	int i_flag;
+	int inodeFlag;
 	Inode(){
 	
-	}
+	} 
 }
