@@ -33,9 +33,19 @@ public class Dentry {
 		this.userName = new StringBuffer();
 		this.dentryName.append(dentryName);
 		this.userName.append(userName);
-		dentryFlag = true; 
+		dentryFlag = true;  
 		createTime.append(getDate()); 
 		fullPath = new StringBuffer("FileManagement");  
+	}
+	
+	Dentry(){//构造函数，根目录
+		this.dentryName = new StringBuffer();
+		this.userName = new StringBuffer();
+		this.dentryName.append("root");
+		dentryFlag = true;  
+		createTime = new StringBuffer();
+		createTime.append(getDate()); 
+		fullPath = new StringBuffer("root");  
 	}
 	
 	String getDate() {//获取日期与时间 
@@ -98,7 +108,7 @@ public class Dentry {
     	return createTime;
     }
     
-	File getFile(int fileNUM) {//获得文件
+	File getFile(int fileNum) {//获得文件
 		return file[fileNum];
 	} 
 	
