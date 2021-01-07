@@ -63,7 +63,7 @@ public class Dentry {
 		childDentryNum++; 
 	}
 	
-	void dentryDelete(){//删除目录
+	void dentryDelete(){//删除当前目录
 		for(int i = 0;i < childDentryNum;i++)
 		{
 			childDentry[childDentryNum].dentryDelete();
@@ -74,13 +74,14 @@ public class Dentry {
 		parentDentry.decChildDentryNum();
 	}
 	
-	void fileCreate(StringBuffer fileName) {//创建文件
+	void fileCreate(StringBuffer fileName) {//创建文件   
+		//不合理，应该仿照分配inode的形式写
 		file[fileNum] = new File(fileName);
 		fileNum++;
 	}
 	
 	void fileDelete(StringBuffer fileName) {//删除文件
-		for(int i=0;i<fileNum;i++)
+		for(int i=0;i<maxFileNum;i++)
 			if(file[i].fileName.equals(fileName)) {
 				file[i].fileDelete();
 				break; 
