@@ -4,11 +4,13 @@ import java.util.*;
 public class Dentry {
 	private StringBuffer dentryName;//目录名字
 	private StringBuffer userName;//创建的用户名字
-    private Dentry[] childDentry = new Dentry[20];//子目录
+	final int maxChildDentryNum=20; //子目录最大数量
+	final int maxFileNum=20; //文件最大数量
+    private Dentry[] childDentry = new Dentry[maxChildDentryNum];//子目录
 	private Dentry parentDentry;//父目录
 	private boolean dentryFlag=false;//是否被建立
 	private StringBuffer createTime;//创建时间
-	private File[] file = new File[20];//文件
+	private File[] file = new File[maxFileNum];//文件
 	private StringBuffer fullPath;//绝对路径
 	private int fileNum = 0;//文件个数
 	private int childDentryNum = 0;//子目录个数 
@@ -25,7 +27,7 @@ public class Dentry {
 		this.parentDentry = parentDentry; 
 		fullPath.append(parentDentry.getFullPath());
 		fullPath.append("/");
-		fullPath.append(parentDentry.getDentryName());
+		fullPath.append(this.getDentryName()); //?
 	} 
 	
 	Dentry(String dentryName,String userName){//构造函数
@@ -69,6 +71,7 @@ public class Dentry {
 		for(int i = 0;i < fileNum;i++)
 			file[i].fileDelete();
 		dentryFlag = false;
+		parentDentry.decChildDentryNum();
 	}
 	
 	void fileCreate(StringBuffer fileName) {//创建文件
@@ -112,12 +115,20 @@ public class Dentry {
 	File getFile(int fileNum) {//获得文件
 		return file[fileNum];
 	} 
-	
+	boolean getFlag() {   //获得目录状态
+		return dentryFlag;
+	}
+	void decChildDentryNum() {//子目录个数减一
+		childDentryNum-=1;
+	}
 	int getFileNum() {//获得文件个数
 		return fileNum;
 	}
 	
 	int getChildDentryNum() {//获得子目录个数
 		return childDentryNum; 
+	}
+	void renameDentryName(StringBuffer newName) {
+		dentryName=newName;
 	}
 }

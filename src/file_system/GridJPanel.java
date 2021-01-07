@@ -33,15 +33,20 @@ public class GridJPanel extends JPanel{
 		showFile(currentDentry);
 	}
 	void showFile(Dentry currentDentry){
+		removeAll();
 		int height=600;
 		dentryNum=currentDentry.getChildDentryNum();
 		fileNum=currentDentry.getFileNum();
 		int num=dentryNum+fileNum;
 		height=Math.max(height,(1+num/6)*100);
 		setPreferredSize(new Dimension(600,height));
+		int j=0;
 		for (int i=0;i<num;i++) {
 			if (i<dentryNum) {
-				add(new dentryButton(10+(i%6)*100,10+(i/6)*100,currentDentry.getChildDentry(i)));
+				while (!currentDentry.getChildDentry(j).getFlag())
+					j++;
+				add(new dentryButton(10+(i%6)*100,10+(i/6)*100,currentDentry.getChildDentry(j),this));
+				j++;
 			}
 			else {
 				add(new fileButton(10+(i%6)*100,10+(i/6)*100));
