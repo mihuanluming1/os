@@ -5,7 +5,7 @@ public class Dentry {
 	private StringBuffer userName;//创建的用户名字
     private Dentry[] childDentry = new Dentry[20];//子目录
 	private Dentry parentDentry;//父目录
-	private boolean flag=false;//是否被建立
+	private boolean dentryFlag=false;//是否被建立
 	private StringBuffer createTime;//创建时间
 	private File[] file = new File[20];//文件
 	private StringBuffer fullPath;//绝对路径
@@ -19,7 +19,7 @@ public class Dentry {
 		this.userName = new StringBuffer();
 		this.dentryName.append(dentryName);
 		this.userName.append(userName);
-		flag = true;
+		dentryFlag = true;
 		createTime.append(getDate());
 		this.parentDentry = parentDentry; 
 		fullPath.append(parentDentry.getFullPath());
@@ -33,7 +33,7 @@ public class Dentry {
 		this.userName = new StringBuffer();
 		this.dentryName.append(dentryName);
 		this.userName.append(userName);
-		flag = true; 
+		dentryFlag = true; 
 		createTime.append(getDate()); 
 		fullPath = new StringBuffer("FileManagement");  
 	}
@@ -51,7 +51,13 @@ public class Dentry {
 	}
 	
 	void dentryDelete(){//删除目录
-		flag = false;
+		for(int i = 0;i < childDentryNum;i++)
+		{
+			childDentry[childDentryNum].dentryDelete();
+		}
+		for(int i = 0;i < fileNum;i++)
+			file[i].fileDelete();
+		dentryFlag = false;
 	}
 	
 	void fileCreate(StringBuffer fileName) {//创建文件
@@ -63,7 +69,7 @@ public class Dentry {
 		for(int i=0;i<fileNum;i++)
 			if(file[i].fileName.equals(fileName)) {
 				file[i].fileDelete();
-				break;
+				break; 
 			}
 	}
 	
