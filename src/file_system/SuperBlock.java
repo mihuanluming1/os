@@ -1,4 +1,4 @@
-
+package file_system;
 public class SuperBlock {
 	private static DataBlock[] dataBlock = new DataBlock[10];
 	private static Inode[] inode = new Inode[10];
