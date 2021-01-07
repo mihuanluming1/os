@@ -2,18 +2,18 @@ package file_system;
 import java.util.*;
 
 public class Dentry {
-	private StringBuffer dentryName;//ç›®å½•åå­—
-	private StringBuffer userName;//åˆ›å»ºçš„ç”¨æˆ·åå­—
-    private Dentry[] childDentry = new Dentry[20];//å­ç›®å½•
-	private Dentry parentDentry;//çˆ¶ç›®å½•
-	private boolean dentryFlag=false;//æ˜¯å¦è¢«å»ºç«‹
-	private StringBuffer createTime;//åˆ›å»ºæ—¶é—´
-	private File[] file = new File[20];//æ–‡ä»¶
-	private StringBuffer fullPath;//ç»å¯¹è·¯å¾„
-	private int fileNum = 0;//æ–‡ä»¶ä¸ªæ•°
-	private int childDentryNum = 0;//å­ç›®å½•ä¸ªæ•° 
+	private StringBuffer dentryName;//Ä¿Â¼Ãû×Ö
+	private StringBuffer userName;//´´½¨µÄÓÃ»§Ãû×Ö
+    private Dentry[] childDentry = new Dentry[20];//×ÓÄ¿Â¼
+	private Dentry parentDentry;//¸¸Ä¿Â¼
+	private boolean dentryFlag=false;//ÊÇ·ñ±»½¨Á¢
+	private StringBuffer createTime;//´´½¨Ê±¼ä
+	private File[] file = new File[20];//ÎÄ¼ş
+	private StringBuffer fullPath;//¾ø¶ÔÂ·¾¶
+	private int fileNum = 0;//ÎÄ¼ş¸öÊı
+	private int childDentryNum = 0;//×ÓÄ¿Â¼¸öÊı 
 	
-	Dentry(String dentryName,StringBuffer userName,Dentry parentDentry){//æ„é€ å‡½æ•° 
+	Dentry(String dentryName,StringBuffer userName,Dentry parentDentry){//¹¹Ôìº¯Êı 
 		fullPath = new StringBuffer();
 		createTime = new StringBuffer();
 		this.dentryName = new StringBuffer();
@@ -28,7 +28,7 @@ public class Dentry {
 		fullPath.append(parentDentry.getDentryName());
 	} 
 	
-	Dentry(String dentryName,String userName){//æ„é€ å‡½æ•°
+	Dentry(String dentryName,String userName){//¹¹Ôìº¯Êı
 		this.dentryName = new StringBuffer();
 		createTime = new StringBuffer();
 		this.userName = new StringBuffer();
@@ -39,7 +39,7 @@ public class Dentry {
 		fullPath = new StringBuffer("FileManagement");  
 	}
 	
-	Dentry(){//æ„é€ å‡½æ•°ï¼Œæ ¹ç›®å½•
+	Dentry(){//¹¹Ôìº¯Êı£¬¸ùÄ¿Â¼
 		this.dentryName = new StringBuffer();
 		this.userName = new StringBuffer();
 		this.dentryName.append("root");
@@ -49,19 +49,19 @@ public class Dentry {
 		fullPath = new StringBuffer("root");  
 	}
 	
-	String getDate() {//è·å–æ—¥æœŸä¸æ—¶é—´ 
+	String getDate() {//»ñÈ¡ÈÕÆÚÓëÊ±¼ä 
 		String time;
 		Date nowTime = new Date();
-		time = String.format("%tYå¹´%<tmæœˆ%<tdæ—¥%tHæ—¶%tMåˆ†",nowTime,nowTime,nowTime,nowTime,nowTime);
+		time = String.format("%tYÄê%<tmÔÂ%<tdÈÕ%tHÊ±%tM·Ö",nowTime,nowTime,nowTime,nowTime,nowTime);
 		return time;
 	}
 	
-	void dentryCreate(String dentryName,StringBuffer userName,Dentry parentDentry) {//åˆ›å»ºå­ç›®å½•
+	void dentryCreate(String dentryName,StringBuffer userName,Dentry parentDentry) {//´´½¨×ÓÄ¿Â¼
 		childDentry[childDentryNum] = new Dentry(dentryName,userName,parentDentry);   
 		childDentryNum++; 
 	}
 	
-	void dentryDelete(){//åˆ é™¤ç›®å½•
+	void dentryDelete(){//É¾³ıÄ¿Â¼
 		for(int i = 0;i < childDentryNum;i++)
 		{
 			childDentry[childDentryNum].dentryDelete();
@@ -71,12 +71,12 @@ public class Dentry {
 		dentryFlag = false;
 	}
 	
-	void fileCreate(StringBuffer fileName) {//åˆ›å»ºæ–‡ä»¶
+	void fileCreate(StringBuffer fileName) {//´´½¨ÎÄ¼ş
 		file[fileNum] = new File(fileName);
 		fileNum++;
 	}
 	
-	void fileDelete(StringBuffer fileName) {//åˆ é™¤æ–‡ä»¶
+	void fileDelete(StringBuffer fileName) {//É¾³ıÎÄ¼ş
 		for(int i=0;i<fileNum;i++)
 			if(file[i].fileName.equals(fileName)) {
 				file[i].fileDelete();
@@ -84,40 +84,40 @@ public class Dentry {
 			}
 	}
 	
-	StringBuffer getDentryName() {//è·å¾—ç›®å½•åå­—
+	StringBuffer getDentryName() {//»ñµÃÄ¿Â¼Ãû×Ö
 		return dentryName;
 	}
 	
-	StringBuffer getFullPath() {//è·å¾—è·¯å¾„
+	StringBuffer getFullPath() {//»ñµÃÂ·¾¶
 		return fullPath;
 	}
 	
-	StringBuffer getUserName() {//è·å¾—ç”¨æˆ·åå­—
+	StringBuffer getUserName() {//»ñµÃÓÃ»§Ãû×Ö
 		return userName;
 	}
 	
-    Dentry getChildDentry(int childDentryNum) {//è·å¾—å­å¯¹è±¡
+    Dentry getChildDentry(int childDentryNum) {//»ñµÃ×Ó¶ÔÏó
     	return childDentry[childDentryNum];
     }
     
-    Dentry getParentDentry() {//è·å¾—çˆ¶å¯¹è±¡
+    Dentry getParentDentry() {//»ñµÃ¸¸¶ÔÏó
     	return parentDentry;
     }
     
-    StringBuffer getCreateTime()//è·å¾—åˆ›å»ºæ—¶é—´
+    StringBuffer getCreateTime()//»ñµÃ´´½¨Ê±¼ä
     {
     	return createTime;
     }
     
-	File getFile(int fileNum) {//è·å¾—æ–‡ä»¶
+	File getFile(int fileNum) {//»ñµÃÎÄ¼ş
 		return file[fileNum];
 	} 
 	
-	int getFileNum() {//è·å¾—æ–‡ä»¶ä¸ªæ•°
+	int getFileNum() {//»ñµÃÎÄ¼ş¸öÊı
 		return fileNum;
 	}
 	
-	int getChildDentryNum() {//è·å¾—å­ç›®å½•ä¸ªæ•°
+	int getChildDentryNum() {//»ñµÃ×ÓÄ¿Â¼¸öÊı
 		return childDentryNum; 
 	}
 }

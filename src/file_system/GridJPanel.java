@@ -13,15 +13,15 @@ public class GridJPanel extends JPanel{
 	int fileNum;
 	int dentryNum;
 	MyJPopupMenu jPopupMenu;
-	public GridJPanel() {
+	public GridJPanel(Dentry currentDentry) {
 		// TODO 自动生成的构造函数存根
 		super();
 		setBackground(Color.white);
 		setPreferredSize(new Dimension(600,600));
 		setLayout(null);
-		fileNum=30;
-		dentryNum=10;
-		jPopupMenu=new MyJPopupMenu(2);
+		fileNum=0;
+		dentryNum=0;
+		jPopupMenu=new MyJPopupMenu(2,currentDentry,this);
 		addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e)
 			{
@@ -30,20 +30,23 @@ public class GridJPanel extends JPanel{
 				}
 			}
 		});
-		showFile();
+		showFile(currentDentry);
 	}
-	void showFile(){
+	void showFile(Dentry currentDentry){
 		int height=600;
+		dentryNum=currentDentry.getChildDentryNum();
+		fileNum=currentDentry.getFileNum();
 		int num=dentryNum+fileNum;
 		height=Math.max(height,(1+num/6)*100);
 		setPreferredSize(new Dimension(600,height));
 		for (int i=0;i<num;i++) {
 			if (i<dentryNum) {
-				add(new dentryButton(10+(i%6)*100,10+(i/6)*100));
+				add(new dentryButton(10+(i%6)*100,10+(i/6)*100,currentDentry.getChildDentry(i)));
 			}
 			else {
 				add(new fileButton(10+(i%6)*100,10+(i/6)*100));
 			}
 		}
+		repaint();
 	}
 }

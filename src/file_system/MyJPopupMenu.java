@@ -14,7 +14,7 @@ public class MyJPopupMenu extends JPopupMenu{
 	JMenuItem deleteItem;
 	JMenuItem newItem;
 	JMenuItem renameItem;
-	public MyJPopupMenu(int type) {
+	public MyJPopupMenu(int type, Dentry currentDentry, GridJPanel gridJPanel) {
 		openItem=new JMenuItem("打开");
 		deleteItem=new JMenuItem("删除");
 		newItem=new JMenuItem("新建");
@@ -85,6 +85,8 @@ public class MyJPopupMenu extends JPopupMenu{
 				{
 					if (e.getButton()==e.BUTTON1) {
 						//new();
+						currentDentry.dentryCreate("new"+currentDentry.getChildDentryNum(), null, currentDentry);
+						gridJPanel.showFile(currentDentry);
 					}
 				}
 			});
