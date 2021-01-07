@@ -8,7 +8,7 @@ public class SuperBlock {
 			if(inode[i].i_flag==0) {
 				return inode[i];
 			}		
-		return inode[0];
+		return null;
 	}
 	static DataBlock DataBlockAllocation() {//数据块分配,存在空的数据块返回该数据块对象
 		for(int i=0;i<10;i++)
