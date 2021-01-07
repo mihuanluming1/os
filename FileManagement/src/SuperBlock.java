@@ -15,7 +15,7 @@ public class SuperBlock {
 			if(dataBlock[i].d_flag==0) {
 				return dataBlock[i];
 			}
-		return dataBlock[0];
+		return null;
 	}
 	boolean getDirty() {//获取脏位
 		return dirty;
