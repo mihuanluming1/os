@@ -1,6 +1,6 @@
 
 public class DataBlock {
-	int d_flag;
+	int dataBlockFlag;
 	private char[] array=new char [10];
 	DataBlock(){
 		
