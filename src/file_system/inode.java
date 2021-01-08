@@ -13,7 +13,7 @@ class Inode {
    void write(String fileContenta){
 	    int x=0;  //偏移参数		
 		datablock=SuperBlock.DataBlockAllocation();
-		//没有加分配失败的处理
+		//没有加分配失败的处理 hhh
 		datablock.write(fileContenta, x);
 		inodeFlag=1;// 已经被使用
     }
