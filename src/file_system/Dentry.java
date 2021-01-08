@@ -132,4 +132,7 @@ public class Dentry {
 	void renameDentryName(StringBuffer newName) {
 		dentryName=newName;
 	}
+	int getMaxChildDentryNum() {
+		return maxChildDentryNum;
+	}
 }
