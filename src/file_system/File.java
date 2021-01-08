@@ -3,18 +3,18 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-public class File {//ÎÄ¼şÀà
-	StringBuffer fileName;//ÎÄ¼şÃû×Ö
-	StringBuffer fileContent;//ÎÄ¼şÄÚÈİ
+public class File {//æ–‡ä»¶ç±»
 
-	StringBuffer fullPath;//ÎÄ¼şËùÔÚÄ¿Â¼£¬Ïà¶ÔÄ¿Â¼£¬Ö»Òª¸¸Ä¿Â¼
-	StringBuffer userName;//ÓÃ»§Ãû                  
-	String modifyTime;//ÎÄ¼şĞŞ¸ÄÊ±¼ä                 
+	private StringBuffer fileName;//æ–‡ä»¶åå­—
+	private StringBuffer fullPath;//æ–‡ä»¶æ‰€åœ¨ç›®å½•ï¼Œç›¸å¯¹ç›®å½•ï¼Œåªè¦çˆ¶ç›®å½•
+	private StringBuffer userName;//ç”¨æˆ·å                  
+	private String modifyTime;//æ–‡ä»¶ä¿®æ”¹æ—¶é—´                 
 
-  Inode fileInode;//ÎÄ¼şË÷Òı
-	int fileSize;//ÎÄ¼ş´óĞ¡
-	boolean fileFlag;//±êÖ¾Î»
-	Inode inode;
+	Inode fileInode;//æ–‡ä»¶ç´¢å¼•
+	private int fileSize;//æ–‡ä»¶å¤§å°
+	private boolean fileFlag;//æ ‡å¿—ä½
+	Inode inode ;
+
 	DataBlock datablock = new DataBlock();
 
 	public File(StringBuffer fileName,StringBuffer fullPath,StringBuffer userName) {
@@ -23,23 +23,19 @@ public class File {//ÎÄ¼şÀà
 		this.userName = userName;
 
 		fileSize = 0;
-		fileContent = null;
 		fileInode = SuperBlock.InodeAllocation();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//ÉèÖÃÈÕÆÚ¸ñÊ½
-        modifyTime = df.format(new Date());// new Date()Îª»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä
-        fileFlag = true; 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//è®¾ç½®æ—¥æœŸæ ¼å¼
+        modifyTime = df.format(new Date());// new Date()ä¸ºè·å–å½“å‰ç³»ç»Ÿæ—¶é—´
+
+        fileFlag = true;
+
 		if(fileInode == null) {
-			//±¨´í
+			//æŠ¥é”™
 		}
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 	}
-	String getFileName() {
-		return fileName.toString();
-	}
-	boolean getFlag() {
-		return fileFlag;
-	}
-	void rename(StringBuffer fileName) {//ĞŞ¸ÄÎÄ¼şÃû
+
+	void rename(StringBuffer fileName) {//ä¿®æ”¹æ–‡ä»¶å
 		StringBuffer sb = new StringBuffer();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
@@ -47,22 +43,21 @@ public class File {//ÎÄ¼şÀà
 		this.fileName = fileName;
 		
 	}
-	//Ã»ÓĞµØ·½µ÷ÓÃÁËsetTime
-	private void setTime() {//ÉèÖÃĞŞ¸ÄÊ±¼ä
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//ÉèÖÃÈÕÆÚ¸ñÊ½
-        modifyTime = df.format(new Date());// new Date()Îª»ñÈ¡µ±Ç°ÏµÍ³Ê±¼ä
+	//æ²¡æœ‰åœ°æ–¹è°ƒç”¨äº†setTime
+	private void setTime() {//è®¾ç½®ä¿®æ”¹æ—¶é—´
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//è®¾ç½®æ—¥æœŸæ ¼å¼
+        modifyTime = df.format(new Date());// new Date()ä¸ºè·å–å½“å‰ç³»ç»Ÿæ—¶é—´
         
 	}
 	private void deleteFlag() {
 		fileSize = 0;
-		fileContent = null;
 		fileName = null;
 		fullPath = null;
 		userName = null;
 		modifyTime = null;
 		fileSize = 0;
 		
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		
 	}
 	void fileDelete() {
@@ -71,9 +66,33 @@ public class File {//ÎÄ¼şÀà
 		inode.delete();
 		
 	}
-	//Ã»ÓĞµØ·½µ÷ÓÃÁËwrite
+	//æ²¡æœ‰åœ°æ–¹è°ƒç”¨äº†write
 	void write(String fileContent){
 		inode.write(fileContent);
 		
+	}
+	StringBuffer getContent() {
+		if(inode != null) {
+			return inode.getFileContent;
+		}
+		return null;
+	}
+	StringBuffer getFileName() {
+		return fileName;
+	}
+	StringBuffer getFullpath() {
+		return fullPath;
+	}
+	StringBuffer getUserName() {
+		return userName;
+	}
+	String getModifyTime() {
+		return modifyTime;
+	}
+	int getFileSize() {
+		return fileSize;
+	}
+	boolean getFileFlag() {
+		return fileFlag;
 	}
 }
