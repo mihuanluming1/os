@@ -3,18 +3,16 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-public class File {//鏂囦欢绫�
+public class File {//文件类
+	private StringBuffer fileName;//文件名字
+	private StringBuffer fullPath;//文件所在目录，相对目录，只要父目录
+	private StringBuffer userName;//用户名                  
+	private String modifyTime;//文件修改时间                 
 
-	private StringBuffer fileName;//鏂囦欢鍚嶅瓧
-	private StringBuffer fullPath;//鏂囦欢鎵�鍦ㄧ洰褰曪紝鐩稿鐩綍锛屽彧瑕佺埗鐩綍
-	private StringBuffer userName;//鐢ㄦ埛鍚�                  
-	private String modifyTime;//鏂囦欢淇敼鏃堕棿                 
-
-	Inode fileInode;//鏂囦欢绱㈠紩
-	private int fileSize;//鏂囦欢澶у皬
-	private boolean fileFlag;//鏍囧織浣�
-	Inode inode ;
-
+	Inode fileInode;//文件索引
+	private int fileSize;//文件大小
+	private boolean fileFlag;//标志位
+	Inode inode = new Inode();
 	DataBlock datablock = new DataBlock();
 
 	public File(StringBuffer fileName,StringBuffer fullPath,StringBuffer userName) {
@@ -24,18 +22,15 @@ public class File {//鏂囦欢绫�
 
 		fileSize = 0;
 		fileInode = SuperBlock.InodeAllocation();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//璁剧疆鏃ユ湡鏍煎紡
-        modifyTime = df.format(new Date());// new Date()涓鸿幏鍙栧綋鍓嶇郴缁熸椂闂�
-
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        modifyTime = df.format(new Date());// new Date()为获取当前系统时间
         fileFlag = true;
-
 		if(fileInode == null) {
-			//鎶ラ敊
+			//报错
 		}
-		// TODO 鑷姩鐢熸垚鐨勬瀯閫犲嚱鏁板瓨鏍�
+		// TODO 自动生成的构造函数存根
 	}
-
-	void rename(StringBuffer fileName) {//淇敼鏂囦欢鍚�
+	void rename(StringBuffer fileName) {//修改文件名
 		StringBuffer sb = new StringBuffer();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
@@ -43,10 +38,10 @@ public class File {//鏂囦欢绫�
 		this.fileName = fileName;
 		
 	}
-	//娌℃湁鍦版柟璋冪敤浜唖etTime
-	private void setTime() {//璁剧疆淇敼鏃堕棿
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//璁剧疆鏃ユ湡鏍煎紡
-        modifyTime = df.format(new Date());// new Date()涓鸿幏鍙栧綋鍓嶇郴缁熸椂闂�
+	//没有地方调用了setTime
+	private void setTime() {//设置修改时间
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        modifyTime = df.format(new Date());// new Date()为获取当前系统时间
         
 	}
 	private void deleteFlag() {
@@ -57,7 +52,7 @@ public class File {//鏂囦欢绫�
 		modifyTime = null;
 		fileSize = 0;
 		
-		// TODO 鑷姩鐢熸垚鐨勬柟娉曞瓨鏍�
+		// TODO 自动生成的方法存根
 		
 	}
 	void fileDelete() {
@@ -66,7 +61,7 @@ public class File {//鏂囦欢绫�
 		inode.delete();
 		
 	}
-	//娌℃湁鍦版柟璋冪敤浜唚rite
+	//没有地方调用了write
 	void write(String fileContent){
 		inode.write(fileContent);
 		
