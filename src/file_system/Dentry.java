@@ -30,17 +30,6 @@ public class Dentry {
 		fullPath.append(this.getDentryName()); //?
 	} 
 	
-	Dentry(String dentryName,String userName){//构造函数
-		this.dentryName = new StringBuffer();
-		createTime = new StringBuffer();
-		this.userName = new StringBuffer();
-		this.dentryName.append(dentryName);
-		this.userName.append(userName);
-		dentryFlag = true;  
-		createTime.append(getDate()); 
-		fullPath = new StringBuffer("FileManagement");  
-	}
-	
 	Dentry(){//构造函数，根目录
 		this.dentryName = new StringBuffer();
 		this.userName = new StringBuffer();
@@ -58,26 +47,49 @@ public class Dentry {
 		return time;
 	}
 	
-	void dentryCreate(String dentryName,StringBuffer userName,Dentry parentDentry) {//创建子目录
-		childDentry[childDentryNum] = new Dentry(dentryName,userName,parentDentry);   
-		childDentryNum++; 
+	boolean dentryCreate(String dentryName,StringBuffer userName,Dentry parentDentry) {//创建子目录
+		if(childDentryNum >= maxChildDentryNum){
+			return false;
+		}
+		else {
+			for(int i = 0;i < maxChildDentryNum;i++)
+				if(childDentry[i]==null||!childDentry[i].dentryFlag){
+					childDentry[i] = new Dentry(dentryName,userName,parentDentry);
+					childDentryNum++;
+					return true;
+				}
+			return false;
+		}
 	}
 	
 	void dentryDelete(){//删除当前目录
 		for(int i = 0;i < childDentryNum;i++)
-		{
 			childDentry[childDentryNum].dentryDelete();
-		}
 		for(int i = 0;i < fileNum;i++)
 			file[i].fileDelete();
 		dentryFlag = false;
 		parentDentry.decChildDentryNum();
 	}
 	
-	void fileCreate(StringBuffer fileName) {//创建文件   
-		//不合理，应该仿照分配inode的形式写
-		file[fileNum] = new File(fileName);
-		fileNum++;
+	boolean fileCreate(StringBuffer fileName) {//创建文件 
+		boolean judge = false;//返回值
+		StringBuffer fullPath = new StringBuffer();
+		fullPath.append(this.fullPath);
+		fullPath.append("/");
+		fullPath.append(dentryName);
+		if(fileNum >= maxFileNum){
+			return judge;//输出错误
+		}
+		else {
+			for(int i = 0;i < maxFileNum;i++)
+				if(file[i]==null||!file[i].fileFlag){
+					file[i] = new File(fileName,fullPath,userName);
+					fileNum++;
+					judge = true;
+					return judge;
+				}
+		}
+		return judge;
 	}
 	
 	void fileDelete(StringBuffer fileName) {//删除文件
@@ -122,6 +134,11 @@ public class Dentry {
 	void decChildDentryNum() {//子目录个数减一
 		childDentryNum-=1;
 	}
+	
+	void decFileNum() {//子目录个数减一
+		fileNum-=1;
+	}
+	
 	int getFileNum() {//获得文件个数
 		return fileNum;
 	}
@@ -131,5 +148,8 @@ public class Dentry {
 	}
 	void renameDentryName(StringBuffer newName) {
 		dentryName=newName;
+	}
+	int getMaxChildDentryNum() {
+		return maxChildDentryNum;
 	}
 }

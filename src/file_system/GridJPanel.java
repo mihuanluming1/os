@@ -15,7 +15,7 @@ public class GridJPanel extends JPanel{
 	int dentryNum;
 	MyJPopupMenu jPopupMenu;
 	JTextField addressField;
-	public GridJPanel(Dentry currentDentry, JTextField addressField) {
+	public GridJPanel(JTextField addressField) {
 		// TODO 自动生成的构造函数存根
 		super();
 		setBackground(Color.white);
@@ -24,13 +24,14 @@ public class GridJPanel extends JPanel{
 		fileNum=0;
 		dentryNum=0;
 		this.addressField=addressField;
-		showFile(currentDentry);
+		showFile();
 	}
 	void setAddressTest(Dentry currentDentry){
 		addressField.setText(currentDentry.getFullPath().toString());
 	}
-	void showFile(Dentry currentDentry){
+	void showFile(){
 		removeAll();
+		Dentry currentDentry=FileSystem.getCurrentDentry();
 		jPopupMenu=new MyJPopupMenu(2,currentDentry,this);
 		addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e)
@@ -48,15 +49,18 @@ public class GridJPanel extends JPanel{
 		height=Math.max(height,(1+num/6)*100);
 		setPreferredSize(new Dimension(600,height));
 		int j=0;
+		int k=0;
 		for (int i=0;i<num;i++) {
 			if (i<dentryNum) {
-				while (!currentDentry.getChildDentry(j).getFlag())
+				while (currentDentry.getChildDentry(j)==null||!currentDentry.getChildDentry(j).getFlag())
 					j++;
 				add(new dentryButton(10+(i%6)*100,10+(i/6)*100,currentDentry.getChildDentry(j),this));
 				j++;
 			}
 			else {
-				add(new fileButton(10+(i%6)*100,10+(i/6)*100));
+				while (currentDentry.getFile(k)==null||!currentDentry.getFile(k).getFlag())
+					k++;
+				add(new fileButton(10+(i%6)*100,10+(i/6)*100,currentDentry.getFile(k)));
 			}
 		}
 		repaint();
