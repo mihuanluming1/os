@@ -17,10 +17,10 @@ public class DataBlock {
 		String str=fileContent;
 		a=str.length()-x;
 		if(a<=10) {
-			String array=str.substring(x); //x表示开始的字符位置，字符串不大于10，就直接读完
+			array=new StringBuffer(str.substring(x)); //x表示开始的字符位置，字符串不大于10，就直接读完
 		}
 		else {              
-			String array=str.substring(x,x+10);     //x表示开始位置，x+10表示结束位置，一次读10个字符。
+			array=new StringBuffer(str.substring(x,x+10));     //x表示开始位置，x+10表示结束位置，一次读10个字符。
 			x=x+10;
 			next=SuperBlock.DataBlockAllocation();
 			next.write(fileContent,x);

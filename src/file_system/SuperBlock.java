@@ -13,7 +13,8 @@ public class SuperBlock {
 	}
 	static DataBlock DataBlockAllocation() {//数据块分配,存在空的数据块返回该数据块对象
 		for(int i = 0;i < 10;i++)
-			if(dataBlock[i].dataBlockFlag == 0) {
+			if(dataBlock[i]==null||dataBlock[i].dataBlockFlag == 0) {
+				dataBlock[i]=new DataBlock();
 				return dataBlock[i];
 			}
 		return null;

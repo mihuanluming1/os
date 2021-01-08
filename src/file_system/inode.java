@@ -15,6 +15,7 @@ class Inode {
 		datablock=SuperBlock.DataBlockAllocation();
 		if(datablock==null) {
 			//有错
+			System.out.println("error");
 		}
 		//没有加分配失败的处理
 		datablock.write(fileContent, x);
