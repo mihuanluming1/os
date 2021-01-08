@@ -7,14 +7,15 @@ public class File {//文件类
 	StringBuffer fileName;//文件名字
 	StringBuffer fileContent;//文件内容
 	StringBuffer fileList;//文件所在目录，相对目录，只要父目录
-	StringBuffer fileUid;//用户ID
-	String modifyTime;//文件修改时间
+	StringBuffer fileUid;//用户ID                   应该为userName
+	String modifyTime;//文件修改时间                 要写一个获取当前时间的成员函数，调用给文件修改时间赋值
 	Inode fileInode;//文件索引
 	int fileSize;//文件大小
 	boolean fileFlag;//标志位
 	Inode inode = new Inode();
 	DataBlock datablock = new DataBlock();
 	public File(StringBuffer fileNamea) {
+		//File(StringBuffer fileName,StringBuffer fullPath,StringBuffer userName)
 		fileSize = 0;
 		fileContent = null;
 		fileName = fileNamea;
