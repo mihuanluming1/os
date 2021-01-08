@@ -1,4 +1,4 @@
-package 文件系统;
+package file_system;
 
 public class DataBlock {
 		int dataBlockFlag;   //数据块是否被使用标志
@@ -21,7 +21,7 @@ public class DataBlock {
 		else {              
 			String array=str.substring(x,x+10);     //x表示开始位置，x+10表示结束位置，一次读10个字符。
 			x=x+10;
-			next=SuperBlock.dataBlockAllocation();
+			next=SuperBlock.DataBlockAllocation();
 			next.write(fileContenta,x);
 		}	
 	}
