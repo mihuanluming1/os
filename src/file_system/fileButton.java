@@ -12,7 +12,7 @@ public class fileButton extends JButton{
 		// TODO 自动生成的构造函数存根
 		super("file");
 		setBounds(x, y, 80, 80);
-		jPopupMenu=new MyJPopupMenu(0);
+		jPopupMenu=new MyJPopupMenu(0, null, null);
 		addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e)
 			{

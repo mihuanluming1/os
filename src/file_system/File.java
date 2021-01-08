@@ -1,4 +1,4 @@
-package 操作系统课程实践;
+package file_system;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -18,14 +18,14 @@ public class File {//文件类
 		fileSize = 0;
 		fileContent = null;
 		fileName = fileNamea;
-		fileList = null;
+		fileList = null; //这里不应该为空
 		fileInode = SuperBlock.InodeAllocation();
-		if(fileInode = null) {
+		if(fileInode == null) {
 			//报错
 		}
 		// TODO 自动生成的构造函数存根
 	}
-	private void rename(StringBuffer f_namea) {//修改文件名
+	void rename(StringBuffer f_namea) {//修改文件名
 		StringBuffer sb = new StringBuffer();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
@@ -33,6 +33,7 @@ public class File {//文件类
 		fileName = f_namea;
 		
 	}
+	//没有地方调用了setTime
 	private void setTime() {//设置修改时间
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         modifyTime = df.format(new Date());// new Date()为获取当前系统时间
@@ -56,6 +57,7 @@ public class File {//文件类
 		inode.delete();
 		
 	}
+	//没有地方调用了write
 	void write(String f_contenta){
 		inode.write(f_contenta);
 		

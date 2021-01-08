@@ -25,7 +25,7 @@ public class CmdJPanel extends JPanel{
 	int height=720;
 	int x=1280-width;
 	int y=0;
-	public CmdJPanel() {
+	public CmdJPanel(Dentry currentDentry) {
 		// TODO 自动生成的构造函数存根
 		super();
 		initialAll();

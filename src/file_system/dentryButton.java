@@ -13,11 +13,12 @@ import javax.swing.JPopupMenu;
 
 public class dentryButton extends JButton {
 	MyJPopupMenu jPopupMenu;
-	dentryButton(int x, int y) {
+	dentryButton(int x, int y, Dentry currentDentry, GridJPanel gridJPanel) {
 		// TODO 自动生成的构造函数存根
 		super("dentry");
 		setBounds(x, y, 80, 80);
-		jPopupMenu=new MyJPopupMenu(1);
+		jPopupMenu=new MyJPopupMenu(1,currentDentry, gridJPanel);
+		setText(currentDentry.getDentryName().toString());
 		addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e)
 			{
@@ -26,6 +27,7 @@ public class dentryButton extends JButton {
 				}
 				else if (e.getButton()==e.BUTTON1) {
 					//open()
+					gridJPanel.showFile(currentDentry);
 				}
 			}
 		});
