@@ -57,7 +57,7 @@ public class File {//文件类
 		inode.delete();
 		
 	}
-	//没有地方调用了write
+	//没有地方调用了write  hhh
 	void write(String f_contenta){
 		inode.write(f_contenta);
 		
