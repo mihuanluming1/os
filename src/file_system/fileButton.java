@@ -8,11 +8,12 @@ import javax.swing.JButton;
 
 public class fileButton extends JButton{
 	MyJPopupMenu jPopupMenu;
-	public fileButton(int x,int y) {
+	public fileButton(int x,int y, File file) {
 		// TODO 自动生成的构造函数存根
-		super("file");
+		super(file.getFileName());
 		setBounds(x, y, 80, 80);
-		jPopupMenu=new MyJPopupMenu(0, null, null);
+		jPopupMenu=new MyJPopupMenu(file);
+		//FileJFrame fileJFrame=new FileJFrame(file);
 		addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e)
 			{
@@ -20,7 +21,7 @@ public class fileButton extends JButton{
 					jPopupMenu.show(e.getComponent(), e.getX(),e.getY());
 				}
 				else if (e.getButton()==e.BUTTON1) {
-					FileJFrame fileJFrame=new FileJFrame();
+					FileJFrame fileJFrame=new FileJFrame(file);
 				}
 			}
 		});

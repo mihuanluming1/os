@@ -13,7 +13,7 @@ class FileJFrame extends JFrame{
 	static int frameWidth=800;
 	JTextPane displayPane;
 	String text="hello world";
-	public FileJFrame() {
+	public FileJFrame(File file) {
 		// TODO 自动生成的构造函数存根
 		super();
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,6 +33,7 @@ class FileJFrame extends JFrame{
 	        	  int n=JOptionPane.showConfirmDialog(null, "是否保存文件修改结果？", "",JOptionPane.YES_NO_OPTION);
 	        	  if (n==0) {
 	        		  //save
+	        		  file.write(displayPane.getText());
 	        	  }
 	          }
 	      });
