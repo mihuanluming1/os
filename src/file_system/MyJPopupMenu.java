@@ -22,36 +22,7 @@ public class MyJPopupMenu extends JPopupMenu{
 		newFileItem=new JMenuItem("新建文件");
 		renameItem=new JMenuItem("重命名");
 		// TODO 自动生成的构造函数存根
-		if (type==0) { //文件菜单
-			openItem.addMouseListener(new MouseAdapter() {
-				public void mouseReleased(MouseEvent e)
-				{
-					if (e.getButton()==e.BUTTON1) {
-						FileJFrame fileJFrame=new FileJFrame();
-					}
-				}
-			});
-			renameItem.addMouseListener(new MouseAdapter() {
-				public void mouseReleased(MouseEvent e)
-				{
-					if (e.getButton()==e.BUTTON1) {
-						//rename();
-					}
-				}
-			});
-			deleteItem.addMouseListener(new MouseAdapter() {
-				public void mouseReleased(MouseEvent e)
-				{
-					if (e.getButton()==e.BUTTON1) {
-						//delete();
-					}
-				}
-			});
-			add(openItem);
-			add(deleteItem);
-			add(renameItem);
-		}
-		else if (type==1) {//目录菜单
+		if (type==1) {//目录菜单
 			renameItem.addMouseListener(new MouseAdapter() {
 				public void mouseReleased(MouseEvent e)
 				{
@@ -96,8 +67,10 @@ public class MyJPopupMenu extends JPopupMenu{
 						//new();
 						String dentryName=JOptionPane.showInputDialog("请输入目录名：");
 						if (dentryName!=null) {
-							currentDentry.dentryCreate(dentryName, null, currentDentry);
-							gridJPanel.showFile();
+							if (currentDentry.dentryCreate(dentryName, null, currentDentry)) {
+								gridJPanel.showFile();
+							}
+							
 						}
 					}
 				}
@@ -110,12 +83,45 @@ public class MyJPopupMenu extends JPopupMenu{
 						//newfile();
 						String fileName=JOptionPane.showInputDialog("请输入文件名：");
 						if (fileName!=null) {
-							//currentDentry.fileCreate(fileName);Create(fileName, null, currentDentry);
+							currentDentry.fileCreate(new StringBuffer(fileName));
 							gridJPanel.showFile();
 						}
 					}
 				}
 			});
 		}
+	}
+	public MyJPopupMenu(File file) {
+		// TODO 自动生成的构造函数存根
+		openItem=new JMenuItem("打开");
+		deleteItem=new JMenuItem("删除");
+		renameItem=new JMenuItem("重命名");
+		openItem.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e)
+			{
+				if (e.getButton()==e.BUTTON1) {
+					FileJFrame fileJFrame=new FileJFrame(null);
+				}
+			}
+		});
+		renameItem.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e)
+			{
+				if (e.getButton()==e.BUTTON1) {
+					//rename();
+				}
+			}
+		});
+		deleteItem.addMouseListener(new MouseAdapter() {
+			public void mouseReleased(MouseEvent e)
+			{
+				if (e.getButton()==e.BUTTON1) {
+					//delete();
+				}
+			}
+		});
+		add(openItem);
+		add(deleteItem);
+		add(renameItem);
 	}
 }

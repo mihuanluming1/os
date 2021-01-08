@@ -15,7 +15,7 @@ public class dentryButton extends JButton {
 	MyJPopupMenu jPopupMenu;
 	dentryButton(int x, int y, Dentry currentDentry, GridJPanel gridJPanel) {
 		// TODO 自动生成的构造函数存根
-		super("dentry");
+		super();
 		setBounds(x, y, 80, 80);
 		jPopupMenu=new MyJPopupMenu(1,currentDentry, gridJPanel);
 		setText(currentDentry.getDentryName().toString());

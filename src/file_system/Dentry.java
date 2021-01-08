@@ -48,21 +48,18 @@ public class Dentry {
 	}
 	
 	boolean dentryCreate(String dentryName,StringBuffer userName,Dentry parentDentry) {//创建子目录
-		boolean judge = false;//返回值
 		if(childDentryNum >= maxChildDentryNum){
-			return judge;//输出错误
+			return false;
 		}
 		else {
 			for(int i = 0;i < maxChildDentryNum;i++)
-				if(!childDentry[i].dentryFlag)
-				{
+				if(childDentry[i]==null||!childDentry[i].dentryFlag){
 					childDentry[i] = new Dentry(dentryName,userName,parentDentry);
-					fileNum++;
-					judge = true;
-					return judge;
+					childDentryNum++;
+					return true;
 				}
+			return false;
 		}
-		return judge;
 	}
 	
 	void dentryDelete(){//删除当前目录
@@ -85,7 +82,7 @@ public class Dentry {
 		}
 		else {
 			for(int i = 0;i < maxFileNum;i++)
-				if(!file[i].fileFlag){
+				if(file[i]==null||!file[i].fileFlag){
 					file[i] = new File(fileName,fullPath,userName);
 					fileNum++;
 					judge = true;
