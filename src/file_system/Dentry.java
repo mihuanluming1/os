@@ -82,7 +82,7 @@ public class Dentry {
 		}
 		else {
 			for(int i = 0;i < maxFileNum;i++)
-				if(file[i]==null||!file[i].fileFlag){
+				if(file[i]==null||!file[i].getFileFlag()){
 					file[i] = new File(fileName,fullPath,userName);
 					fileNum++;
 					judge = true;
@@ -94,7 +94,7 @@ public class Dentry {
 	
 	void fileDelete(StringBuffer fileName) {//É¾³ýÎÄ¼þ
 		for(int i=0;i<maxFileNum;i++)
-			if(file[i].fileName.equals(fileName)) {
+			if(file[i].getFileName().equals(fileName)) {
 				file[i].fileDelete();
 				break; 
 			}

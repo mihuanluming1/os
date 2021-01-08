@@ -10,7 +10,7 @@ public class fileButton extends JButton{
 	MyJPopupMenu jPopupMenu;
 	public fileButton(int x,int y, File file) {
 		// TODO 自动生成的构造函数存根
-		super(file.getFileName());
+		super(file.getFileName().toString());
 		setBounds(x, y, 80, 80);
 		jPopupMenu=new MyJPopupMenu(file);
 		//FileJFrame fileJFrame=new FileJFrame(file);

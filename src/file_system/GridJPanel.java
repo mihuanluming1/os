@@ -58,7 +58,7 @@ public class GridJPanel extends JPanel{
 				j++;
 			}
 			else {
-				while (currentDentry.getFile(k)==null||!currentDentry.getFile(k).getFlag())
+				while (currentDentry.getFile(k)==null||!currentDentry.getFile(k).getFileFlag())
 					k++;
 				add(new fileButton(10+(i%6)*100,10+(i/6)*100,currentDentry.getFile(k)));
 			}
