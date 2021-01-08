@@ -10,13 +10,22 @@ class Inode {
     	inodeFlag=0;  //初始成未被使用
     	datablock=null;
     }
-   void write(String fileContenta){
+   void write(String fileContent){
 	    int x=0;  //偏移参数		
 		datablock=SuperBlock.DataBlockAllocation();
-		//没有加分配失败的处理 hhh
-		datablock.write(fileContenta, x);
+		if(datablock==null) {
+			//有错
+		}
+		//没有加分配失败的处理
+		datablock.write(fileContent, x);
 		inodeFlag=1;// 已经被使用
     }
+   StringBuffer  getFileContent() {
+	   if(datablock!=null) {
+		   return datablock.getFileContent();
+	   }
+	   return null;
+   }
    void delete() {
 	   if(datablock!=null)
 		   datablock.delete();  //调用数据块删除
