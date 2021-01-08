@@ -59,7 +59,7 @@ public class MyJPopupMenu extends JPopupMenu{
 						//rename();
 						StringBuffer dentryName=new StringBuffer(JOptionPane.showInputDialog("请输入目录名："));
 						currentDentry.renameDentryName(dentryName);
-						gridJPanel.showFile(currentDentry.getParentDentry());
+						gridJPanel.showFile();
 					}
 				}
 			});
@@ -69,7 +69,7 @@ public class MyJPopupMenu extends JPopupMenu{
 					if (e.getButton()==e.BUTTON1) {
 						//delete();
 						currentDentry.dentryDelete();
-						gridJPanel.showFile(currentDentry.getParentDentry());
+						gridJPanel.showFile();
 					}
 				}
 			});
@@ -78,7 +78,8 @@ public class MyJPopupMenu extends JPopupMenu{
 				{
 					if (e.getButton()==e.BUTTON1) {
 						//open();
-						gridJPanel.showFile(currentDentry);
+						FileSystem.setCurrentDentry(currentDentry);
+						gridJPanel.showFile();
 					}
 				}
 			});
@@ -95,7 +96,7 @@ public class MyJPopupMenu extends JPopupMenu{
 						//new();
 						String dentryName=new String(JOptionPane.showInputDialog("请输入目录名："));
 						currentDentry.dentryCreate(dentryName, null, currentDentry);
-						gridJPanel.showFile(currentDentry);
+						gridJPanel.showFile();
 					}
 				}
 			});
