@@ -10,7 +10,7 @@ public class Dentry {
 	private Dentry parentDentry;//父目录
 	private boolean dentryFlag=false;//是否被建立
 	private StringBuffer createTime;//创建时间
-	private File[] file = new File[maxFileNum];//文件
+	private MyFile[] file = new MyFile[maxFileNum];//文件
 	private StringBuffer fullPath;//绝对路径
 	private int fileNum = 0;//文件个数
 	private int childDentryNum = 0;//子目录个数 
@@ -63,10 +63,16 @@ public class Dentry {
 	}
 	
 	void dentryDelete(){//删除当前目录
-		for(int i = 0;i < childDentryNum;i++)
-			childDentry[childDentryNum].dentryDelete();
-		for(int i = 0;i < fileNum;i++)
-			file[i].fileDelete();
+		for(int i = 0;i < childDentryNum;i++) {
+			if (childDentry[i]!=null) {
+				childDentry[i].dentryDelete();
+			}
+		}
+		for(int i = 0;i < fileNum;i++) {
+			if (file[i]!=null) {
+				file[i].fileDelete();
+			}
+		}
 		dentryFlag = false;
 		parentDentry.decChildDentryNum();
 	}
@@ -83,7 +89,7 @@ public class Dentry {
 		else {
 			for(int i = 0;i < maxFileNum;i++)
 				if(file[i]==null||!file[i].getFileFlag()){
-					file[i] = new File(fileName,fullPath,userName);
+					file[i] = new MyFile(fileName,fullPath,userName);
 					fileNum++;
 					judge = true;
 					return judge;
@@ -94,10 +100,11 @@ public class Dentry {
 	
 	void fileDelete(StringBuffer fileName) {//删除文件
 		for(int i=0;i<maxFileNum;i++)
-			if(file[i].getFileName().equals(fileName)) {
+			if(file[i]!=null&&file[i].getFileName().equals(fileName)) {
 				file[i].fileDelete();
 				break; 
 			}
+		fileNum--;
 	}
 	
 	StringBuffer getDentryName() {//获得目录名字
@@ -125,7 +132,7 @@ public class Dentry {
     	return createTime;
     }
     
-	File getFile(int fileNum) {//获得文件
+	MyFile getFile(int fileNum) {//获得文件
 		return file[fileNum];
 	} 
 	boolean getFlag() {   //获得目录状态

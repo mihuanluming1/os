@@ -91,7 +91,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			});
 		}
 	}
-	public MyJPopupMenu(File file) {
+	public MyJPopupMenu(MyFile file,GridJPanel gridJPanel,Dentry currentDentry) {
 		// TODO 自动生成的构造函数存根
 		openItem=new JMenuItem("打开");
 		deleteItem=new JMenuItem("删除");
@@ -100,7 +100,7 @@ public class MyJPopupMenu extends JPopupMenu{
 			public void mouseReleased(MouseEvent e)
 			{
 				if (e.getButton()==e.BUTTON1) {
-					FileJFrame fileJFrame=new FileJFrame(null);
+					FileJFrame fileJFrame=new FileJFrame(file);
 				}
 			}
 		});
@@ -109,6 +109,11 @@ public class MyJPopupMenu extends JPopupMenu{
 			{
 				if (e.getButton()==e.BUTTON1) {
 					//rename();
+					String fileName=JOptionPane.showInputDialog("请输入文件名：");
+					if (fileName!=null) {
+						file.rename(new StringBuffer(fileName));
+						gridJPanel.showFile();
+					}
 				}
 			}
 		});
@@ -117,6 +122,9 @@ public class MyJPopupMenu extends JPopupMenu{
 			{
 				if (e.getButton()==e.BUTTON1) {
 					//delete();
+					currentDentry.fileDelete(file.getFileName());
+					//file.fileDelete();
+					gridJPanel.showFile();
 				}
 			}
 		});

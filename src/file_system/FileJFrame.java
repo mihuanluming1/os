@@ -13,7 +13,7 @@ class FileJFrame extends JFrame{
 	static int frameWidth=800;
 	JTextPane displayPane;
 	String text="hello world";
-	public FileJFrame(File file) {
+	public FileJFrame(MyFile file) {
 		// TODO 自动生成的构造函数存根
 		super();
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -21,6 +21,12 @@ class FileJFrame extends JFrame{
 		setLocationRelativeTo(null);
 		setLayout(null);
 		displayPane=new JTextPane();
+		StringBuffer temp=file.getContent();
+		if (temp==null)
+			text=null;
+		else {
+			text=temp.toString();
+		}
 		displayPane.setText(text);
 		displayPane.setSize(frameWidth, frameHeight);
 		displayPane.setFont(new Font(null, Font.PLAIN, 20));

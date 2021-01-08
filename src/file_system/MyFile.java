@@ -3,7 +3,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-public class File {//文件类
+public class MyFile {//文件类
 	private StringBuffer fileName;//文件名字
 	private StringBuffer fullPath;//文件所在目录，相对目录，只要父目录
 	private StringBuffer userName;//用户名                  
@@ -15,7 +15,7 @@ public class File {//文件类
 	Inode inode = new Inode();
 	DataBlock datablock = new DataBlock();
 
-	public File(StringBuffer fileName,StringBuffer fullPath,StringBuffer userName) {
+	public MyFile(StringBuffer fileName,StringBuffer fullPath,StringBuffer userName) {
 		this.fileName = fileName;
 		this.fullPath = fullPath; 
 		this.userName = userName;
@@ -31,10 +31,6 @@ public class File {//文件类
 		// TODO 自动生成的构造函数存根
 	}
 	void rename(StringBuffer fileName) {//修改文件名
-		StringBuffer sb = new StringBuffer();
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-		sb.append(scanner.next());
 		this.fileName = fileName;
 		
 	}
@@ -58,7 +54,8 @@ public class File {//文件类
 	void fileDelete() {
 		fileFlag = false;
 		deleteFlag();
-		inode.delete();
+		if (inode!=null)
+			inode.delete();
 		
 	}
 	//没有地方调用了write
