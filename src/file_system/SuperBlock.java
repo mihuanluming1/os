@@ -5,7 +5,8 @@ public class SuperBlock {
 	private boolean dirty = false;//脏位，内存中的数据是否被改变的标志
 	static Inode InodeAllocation() {
 		for(int i=0;i<10;i++)
-			if(inode[i].inodeFlag == 0) {
+			if(inode[i]==null||inode[i].inodeFlag == 0) {
+				inode[i]=new Inode();
 				return inode[i]; 
 			}		
 		return null;

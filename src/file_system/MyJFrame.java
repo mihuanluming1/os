@@ -24,5 +24,10 @@ class MyJFrame extends JFrame{
 		setVisible(true);
 		repaint();
 	}
+	public void repaintDetailPanel() {
+		// TODO 自动生成的方法存根
+		detailJPanel.repaintGridPanel();
+		
+	}
 
 }

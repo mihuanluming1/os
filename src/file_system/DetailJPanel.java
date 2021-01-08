@@ -2,6 +2,8 @@ package file_system;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -29,6 +31,16 @@ public class DetailJPanel extends JPanel{
 		addressField.setBounds(50, 20, 620, 40);
 		addressField.setText(FileSystem.getCurrentDentry().getFullPath().toString());
 		addressField.setFont(new Font(null, Font.PLAIN, 20));
+		addressField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO 自动生成的方法存根
+				if ((char)e.getKeyChar()==KeyEvent.VK_ENTER) {
+					FileSystem.cdOrder(addressField.getText());
+				}
+				
+			}
+		});
 		add(addressField);
 		
 	}
@@ -40,6 +52,11 @@ public class DetailJPanel extends JPanel{
         jsp.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jsp.repaint();
 		add(jsp);
+		
+	}
+	public void repaintGridPanel() {
+		// TODO 自动生成的方法存根
+		gridJPanel.showFile();
 		
 	}
 
