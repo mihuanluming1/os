@@ -94,9 +94,11 @@ public class MyJPopupMenu extends JPopupMenu{
 				{
 					if (e.getButton()==e.BUTTON1) {
 						//new();
-						String dentryName=new String(JOptionPane.showInputDialog("请输入目录名："));
-						currentDentry.dentryCreate(dentryName, null, currentDentry);
-						gridJPanel.showFile();
+						String dentryName=JOptionPane.showInputDialog("请输入目录名：");
+						if (dentryName!=null) {
+							currentDentry.dentryCreate(dentryName, null, currentDentry);
+							gridJPanel.showFile();
+						}
 					}
 				}
 			});
@@ -106,6 +108,11 @@ public class MyJPopupMenu extends JPopupMenu{
 				{
 					if (e.getButton()==e.BUTTON1) {
 						//newfile();
+						String fileName=JOptionPane.showInputDialog("请输入文件名：");
+						if (fileName!=null) {
+							//currentDentry.fileCreate(fileName);Create(fileName, null, currentDentry);
+							gridJPanel.showFile();
+						}
 					}
 				}
 			});
