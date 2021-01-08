@@ -10,31 +10,31 @@ import javax.swing.JTextField;
 public class DetailJPanel extends JPanel{
 	JTextField addressField;
 	GridJPanel gridJPanel;
-	public DetailJPanel(Dentry currentDentry) {
+	public DetailJPanel() {
 		// TODO 自动生成的构造函数存根
 		super();
-		initialAll(currentDentry);
+		initialAll();
 		
 	}
-	void initialAll(Dentry currentDentry) {
+	void initialAll() {
 		setLayout(null);
 		setBounds(0, 0, 700, 700);
-		initialJTextField(currentDentry);
-		initialGridJPanel(currentDentry,addressField);
+		initialJTextField();
+		initialGridJPanel(addressField);
 		setVisible(true);
 	}
-	private void initialJTextField(Dentry currentDentry) {
+	private void initialJTextField() {
 		// TODO 自动生成的方法存根
 		addressField=new JTextField();
 		addressField.setBounds(50, 20, 620, 40);
-		addressField.setText(currentDentry.getFullPath().toString());
+		addressField.setText(FileSystem.getCurrentDentry().getFullPath().toString());
 		addressField.setFont(new Font(null, Font.PLAIN, 20));
 		add(addressField);
 		
 	}
-	void initialGridJPanel(Dentry currentDentry, JTextField addressField) {
+	void initialGridJPanel(JTextField addressField) {
 		
-		gridJPanel=new GridJPanel(currentDentry,addressField);
+		gridJPanel=new GridJPanel(addressField);
 		JScrollPane jsp = new JScrollPane(gridJPanel);
         jsp.setBounds(50, 65, 620, 600);
         jsp.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

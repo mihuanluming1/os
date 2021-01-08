@@ -15,7 +15,7 @@ public class GridJPanel extends JPanel{
 	int dentryNum;
 	MyJPopupMenu jPopupMenu;
 	JTextField addressField;
-	public GridJPanel(Dentry currentDentry, JTextField addressField) {
+	public GridJPanel(JTextField addressField) {
 		// TODO 自动生成的构造函数存根
 		super();
 		setBackground(Color.white);
@@ -24,13 +24,14 @@ public class GridJPanel extends JPanel{
 		fileNum=0;
 		dentryNum=0;
 		this.addressField=addressField;
-		showFile(currentDentry);
+		showFile();
 	}
 	void setAddressTest(Dentry currentDentry){
 		addressField.setText(currentDentry.getFullPath().toString());
 	}
-	void showFile(Dentry currentDentry){
+	void showFile(){
 		removeAll();
+		Dentry currentDentry=FileSystem.getCurrentDentry();
 		jPopupMenu=new MyJPopupMenu(2,currentDentry,this);
 		addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e)

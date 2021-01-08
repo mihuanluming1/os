@@ -9,7 +9,7 @@ class MyJFrame extends JFrame{
 	static String frameNameString="文件系统";
 	static int frameHeight=720;
 	static int frameWidth=1280;
-	public MyJFrame(Dentry currentDentry) {
+	public MyJFrame() {
 		// TODO 自动生成的构造函数存根
 		super(frameNameString);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -17,9 +17,9 @@ class MyJFrame extends JFrame{
 		setSize(frameWidth,frameHeight);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		cmdJPanel=new CmdJPanel(currentDentry);
+		cmdJPanel=new CmdJPanel();
 		add(cmdJPanel);
-		detailJPanel=new DetailJPanel(currentDentry);
+		detailJPanel=new DetailJPanel();
 		add(detailJPanel);
 		setVisible(true);
 		repaint();
