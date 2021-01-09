@@ -1,31 +1,22 @@
 package file_system;
 
+import java.awt.Window;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class FileSystem {
 	private static Dentry currentDentry;
-	private static StringBuffer userName;
 	private static Dentry rootDentry;
+	private static MyUser [] users=new MyUser[100];
+	private static String currentUser;
 	private static MyJFrame myJFrame;
 	private static String currentPath;
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
-		rootDentry=new Dentry();
-		currentDentry=rootDentry;
-		myJFrame=new MyJFrame();
-		//currentDentry=new Dentry();
-		//System.out.println(current.getFullPath());
-		/*Dentry current;
-		Dentry root = new Dentry("root","20857");
-		root.dentryCreate("abc",root.getUserName(),root); 
-		current = root.getChildDentry(0);
-		System.out.println(current.getFullPath()); 
-		current.dentryCreate("sdf",current.getUserName(),current);
-		current = current.getChildDentry(0);
-		System.out.println (current.getFullPath()); 
-		current=root.getChildDentry(0).getChildDentry(0);
-		System.out.print(current.getFullPath());*/
+		users[0]=new MyUser("admin", "123");
+		login();
+		
 	}
 	static void setCurrentDentry(Dentry currentDentry) {
 		FileSystem.currentDentry=currentDentry;
@@ -61,5 +52,64 @@ public class FileSystem {
 		else
 			myJFrame.repaintDetailPanel();
 	}
-
+	static void initPanel(String userName) {
+		if (checkAdmin(userName)) {
+			rootDentry=new Dentry(userName);
+			currentDentry=rootDentry;
+			myJFrame=new MyJFrame();
+		}
+		else {
+			rootDentry=getDentry(userName);
+			myJFrame=new MyJFrame();
+		}
+		//rootDentry=new Dentry();
+		//currentDentry=rootDentry;
+		//myJFrame=new MyJFrame();
+	}
+	private static Dentry getDentry(String userName) {
+		// TODO 自动生成的方法存根
+		return rootDentry.getChildDentry(userName);
+	}
+	public static String checkUser(String userName, String password) {
+		for (int i=0;i<100;i++) {
+			if (users[i]!=null&&users[i].getFlag()&&users[i].checkUser(userName, password)) {
+				return users[i].getUserName();
+			}
+		}
+		return null;
+		// TODO 自动生成的方法存根
+		
+	}
+	public static boolean checkAdmin(String userName) {
+		return users[0].getUserName().equals(userName);
+		
+	}
+	public static boolean checkUserName(String userName) {
+		// TODO 自动生成的方法存根
+		for (int i=0;i<100;i++) {
+			if (users[i]!=null&&users[i].getFlag()&&users[i].getUserName().equals(userName)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	public static void createUser(String userName, String password) {
+		// TODO 自动生成的方法存根
+		for (int i=0;i<100;i++) {
+			if (users[i]==null||!users[i].getFlag()) {
+				users[i]=new MyUser(userName, password);
+				rootDentry.dentryCreate(userName, userName, rootDentry);
+				myJFrame.repaintDetailPanel();
+				break;
+			}
+		}
+		
+	}
+	public static MyJFrame getJFrame() {
+		// TODO 自动生成的方法存根
+		return myJFrame;
+	}
+	public static void login() {
+		LoginJFrame loginJFrame=new LoginJFrame();
+	}
 }
