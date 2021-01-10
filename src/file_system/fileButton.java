@@ -14,15 +14,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class fileButton extends JButton{
-	MyJPopupMenu jPopupMenu;
-	JLabel jLabel;
+	MyJPopupMenu jPopupMenu; //右键菜单
+	JLabel jLabel; //显示文件名称
 	public fileButton(int x,int y, MyFile file, GridJPanel gridJPanel, Dentry currentDentry) {
 		// TODO 自动生成的构造函数存根
 		super();
 		jLabel=new JLabel(file.getFileName().toString()+".txt",JLabel.CENTER);
 		setBounds(x, y, 80, 80);
 		jLabel.setBounds(x, y+80, 80, 20);
-		//jLabel.setHorizontalTextPosition(CENTER);
 		gridJPanel.add(jLabel);
 		ImageIcon icon;
 		try {
@@ -37,7 +36,6 @@ public class fileButton extends JButton{
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		jPopupMenu=new MyJPopupMenu(file, gridJPanel,currentDentry);
-		//FileJFrame fileJFrame=new FileJFrame(file);
 		addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e){
 				setOpaque(false);

@@ -29,6 +29,9 @@ public class MyJPopupMenu extends JPopupMenu{
 		detailItem=new JMenuItem("详细信息");
 		// TODO 自动生成的构造函数存根
 		if (type==1) {//目录菜单
+			if (!currentDentry.getParentDentry().getUserName().equals(currentDentry.getUserName())) {
+				deleteItem.setText("删除用户");
+			}
 			renameItem.addMouseListener(new MouseAdapter() {
 				public void mouseReleased(MouseEvent e)
 				{
@@ -103,7 +106,7 @@ public class MyJPopupMenu extends JPopupMenu{
 					}
 				}
 			});
-			if (FileSystem.checkAdmin(currentDentry.getUserName().toString())){
+			if (currentDentry.getDentryName().equals("root")&&FileSystem.checkAdmin(currentDentry.getUserName().toString())){
 				add(newUserItem);
 				newUserItem.addMouseListener(new MouseAdapter() {
 					public void mouseReleased(MouseEvent e){
@@ -157,7 +160,6 @@ public class MyJPopupMenu extends JPopupMenu{
 				if (e.getButton()==e.BUTTON1) {
 					//delete();
 					currentDentry.fileDelete(file.getFileName());
-					//file.fileDelete();
 					gridJPanel.showFile();
 				}
 			}

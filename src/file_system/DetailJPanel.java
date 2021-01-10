@@ -10,22 +10,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class DetailJPanel extends JPanel{
-	JTextField addressField;
-	GridJPanel gridJPanel;
+	JTextField addressField;//地址栏
+	GridJPanel gridJPanel;//地址详细内容界面
 	public DetailJPanel() {
 		// TODO 自动生成的构造函数存根
 		super();
 		initialAll();
 		
 	}
-	void initialAll() {
+	void initialAll() {//初始化
 		setLayout(null);
 		setBounds(0, 0, 700, 700);
 		initialJTextField();
 		initialGridJPanel(addressField);
 		setVisible(true);
 	}
-	private void initialJTextField() {
+	private void initialJTextField() {//初始化地址栏
 		// TODO 自动生成的方法存根
 		addressField=new JTextField();
 		addressField.setBounds(50, 20, 620, 40);
@@ -44,7 +44,7 @@ public class DetailJPanel extends JPanel{
 		add(addressField);
 		
 	}
-	void initialGridJPanel(JTextField addressField) {
+	void initialGridJPanel(JTextField addressField) {//初始化地址内容详细页面
 		
 		gridJPanel=new GridJPanel(addressField);
 		JScrollPane jsp = new JScrollPane(gridJPanel);
@@ -54,7 +54,7 @@ public class DetailJPanel extends JPanel{
 		add(jsp);
 		
 	}
-	public void repaintGridPanel() {
+	public void repaintGridPanel() {//刷新
 		// TODO 自动生成的方法存根
 		gridJPanel.showFile();
 		

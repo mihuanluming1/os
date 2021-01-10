@@ -13,11 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.text.View;
 
 class LoginJFrame extends JFrame{
-	JButton loginButton;
-	JTextField usernameField;
-	JPasswordField passwordField;
-	JLabel usernameJLabel;
-	JLabel passwordJLabel;
+	JButton loginButton;  //登录按钮
+	JTextField usernameField;//用户名输入框
+	JPasswordField passwordField;//密码输入框
+	JLabel usernameJLabel;//用户名标签
+	JLabel passwordJLabel;//密码标签
 	LoginJFrame (){
 		super("登录");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,13 +49,19 @@ class LoginJFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO 自动生成的方法存根
 				if (e.getSource()==loginButton) {
-					String userName=FileSystem.checkUser(usernameField.getText(), String.valueOf(passwordField.getPassword()));
-					if (userName!=null) {
+					String userName=usernameField.getText();
+					int flag=FileSystem.checkUser(usernameField.getText(), String.valueOf(passwordField.getPassword()));
+					System.out.println(flag);
+					if (flag==0) {
 						FileSystem.initPanel(userName);
 						dispose();
 					}
-					else {
+					else if (flag==1){
 						JOptionPane.showMessageDialog(null, "用户名与密码不匹配", "Error", JOptionPane.ERROR_MESSAGE); 
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "用户名不存在", "Error", JOptionPane.ERROR_MESSAGE); 
+						
 					}
 				}
 			}

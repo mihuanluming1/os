@@ -13,8 +13,8 @@ public class GridJPanel extends JPanel{
 	//GridLayout gridLayout=new GridLayout(6, 6, 20, 20);
 	int fileNum;
 	int dentryNum;
-	MyJPopupMenu jPopupMenu;
-	JTextField addressField;
+	MyJPopupMenu jPopupMenu; //右键菜单
+	JTextField addressField; //地址栏
 	public GridJPanel(JTextField addressField) {
 		// TODO 自动生成的构造函数存根
 		super();
@@ -26,10 +26,10 @@ public class GridJPanel extends JPanel{
 		this.addressField=addressField;
 		showFile();
 	}
-	void setAddressTest(Dentry currentDentry){
+	void setAddressTest(Dentry currentDentry){ //设置地址
 		addressField.setText(currentDentry.getFullPath().toString());
 	}
-	void showFile(){
+	void showFile(){  //显示目录和文件
 		removeAll();
 		Dentry currentDentry=FileSystem.getCurrentDentry();
 		jPopupMenu=new MyJPopupMenu(2,currentDentry,this);

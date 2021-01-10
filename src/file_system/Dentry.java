@@ -1,7 +1,9 @@
 package file_system;
+
 import java.util.*;
 
 public class Dentry {
+	
 	private String dentryName;//目录名字
 	private String userName;//创建的用户名字
 	final int maxChildDentryNum=20; //子目录最大数量
@@ -47,7 +49,7 @@ public class Dentry {
 		time = String.format("%tY年%<tm月%<td日%tH时%tM分",nowTime,nowTime,nowTime,nowTime,nowTime);
 		return time;
 	}
-	void setChangeTime() {
+	void setChangeTime() {//设置文件修改时间
 		changeTime = new StringBuffer();
 		changeTime.append(getDate()); 
 	}
@@ -78,11 +80,15 @@ public class Dentry {
 				file[i].fileDelete();
 			}
 		}
+		if (!parentDentry.getUserName().equals(userName)) {
+			FileSystem.deleteUser(userName);
+		}
 		dentryFlag = false;
 		parentDentry.decChildDentryNum();
 		parentDentry.setChangeTime();
 	}
 	
+
 	boolean fileCreate(String fileName) {//创建文件 
 		boolean judge = false;//返回值
 		StringBuffer fullPath = new StringBuffer();
@@ -164,18 +170,18 @@ public class Dentry {
 	int getChildDentryNum() {//获得子目录个数
 		return childDentryNum; 
 	}
-	void renameDentryName(String newName) {
+	void renameDentryName(String newName) {//重命名
 		setChangeTime();
 		fullPath=new StringBuffer(parentDentry.getFullPath());
 		fullPath.append("/");
 		fullPath.append(newName);
 		dentryName=newName;
 	}
-	int getMaxChildDentryNum() {
+	int getMaxChildDentryNum() {//获取子目录最大个数
 		return maxChildDentryNum;
 	}
 
-	Dentry getChildDentry(String userName) {
+	Dentry getChildDentry(String userName) {//获取子目录
 		// TODO 自动生成的方法存根
 		for (int i=0;i<maxChildDentryNum;i++) {
 			if (childDentry[i]!=null&&childDentry[i].getDentryName().equals(userName)) {
@@ -184,4 +190,6 @@ public class Dentry {
 		}
 		return null;
 	}
+
+	 
 }

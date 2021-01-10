@@ -1,9 +1,10 @@
 package file_system;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
 
-public class MyFile {//文件类
+
+public class MyFile {
+
+//文件类
 	private String fileName;//文件名字
 	private StringBuffer fullPath;//文件所在目录，相对目录，只要父目录
 	private String userName;//用户名       
@@ -13,8 +14,7 @@ public class MyFile {//文件类
 	Inode fileInode;//文件索引
 	private int fileSize;//文件大小
 	private boolean fileFlag;//标志位
-	Inode inode = new Inode();
-	DataBlock datablock = new DataBlock();
+	Inode inode = new Inode(); 
 
 	public MyFile(String fileName2,StringBuffer fullPath,String userName2) {
 		this.fileName = fileName2;
@@ -40,14 +40,14 @@ public class MyFile {//文件类
 		time = String.format("%tY年%<tm月%<td日%tH时%tM分",nowTime,nowTime,nowTime,nowTime,nowTime);
 		return time;
 	}
-	void setFullPath() {
+	void setFullPath() { //设置文件路径
 		fullPath=new StringBuffer();
 		fullPath.append(parentFullPath);
 		fullPath.append("/");
 		fullPath.append(fileName); 
 		fullPath.append(".txt");
 	}
-	void setChangeTime() {
+	void setChangeTime() {//设置文件修改时间
 		changeTime = new StringBuffer();
 		changeTime.append(getDate()); 
 	}
@@ -57,7 +57,7 @@ public class MyFile {//文件类
 		this.fileName = fileName;
 		
 	}
-	private void deleteFlag() {
+	private void deleteFlag() { //清空相关属性
 		fileSize = 0;
 		fileName = null;
 		fullPath = null;
@@ -67,44 +67,44 @@ public class MyFile {//文件类
 		// TODO 自动生成的方法存根
 		
 	}
-	void fileDelete() {
+	void fileDelete() { //删除文件
 		fileFlag = false;
 		deleteFlag();
 		if (inode!=null)
 			inode.delete();
 		
 	}
-	void write(String fileContent){
+	void write(String fileContent){ //向文件里写入信息
 		setChangeTime();
 		inode.write(fileContent);
 		
 	}
-	StringBuffer getContent() {
+	StringBuffer getContent() { //获取文件内容
 		if(inode != null) {
 			return inode.getFileContent();
 		}
 		return null;
 	}
-	String getFileName() {
+	String getFileName() { //获取文件名字
 		return fileName;
 	}
-	StringBuffer getFullPath() {
+	StringBuffer getFullPath() {//获取文件路径
 		return fullPath;
 	}
-	String getUserName() {
+	String getUserName() {//获取用户名字
 		return userName;
 	}
-	int getFileSize() {
+	int getFileSize() {//获取文件大小
 		return fileSize;
 	}
-	boolean getFileFlag() {
+	boolean getFileFlag() {//获取文件使用标志
 		return fileFlag;
 	}
-	StringBuffer getCreateTime() {
+	StringBuffer getCreateTime() {//获取文件创建时间
 		// TODO 自动生成的方法存根
 		return createTime;
 	}
-	StringBuffer getChangeTime() {
+	StringBuffer getChangeTime() {//获取文件修改时间
 		// TODO 自动生成的方法存根
 		return changeTime;
 	}

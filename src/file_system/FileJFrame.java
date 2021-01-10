@@ -11,8 +11,8 @@ import javax.swing.JTextPane;
 class FileJFrame extends JFrame{
 	static int frameHeight=600;
 	static int frameWidth=800;
-	JTextPane displayPane;
-	String text="hello world";
+	JTextPane displayPane; //文件内容显示界面
+	String text="hello world";  //文件内容
 	public FileJFrame(MyFile file) {
 		// TODO 自动生成的构造函数存根
 		super();

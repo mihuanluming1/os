@@ -18,8 +18,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 public class dentryButton extends JButton {
-	MyJPopupMenu jPopupMenu;
-	JLabel jLabel;
+	MyJPopupMenu jPopupMenu;//右键菜单
+	JLabel jLabel;//目录名标签
 	dentryButton(int x, int y, Dentry currentDentry, GridJPanel gridJPanel) {
 		// TODO 自动生成的构造函数存根
 		super();

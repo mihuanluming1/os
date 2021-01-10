@@ -12,16 +12,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LogonJFrame extends JFrame{
-	JButton logonButton;
-	JTextField usernameField;
-	JPasswordField passwordField;
-	JPasswordField passwordField2;
-	JLabel usernameJLabel;
-	JLabel passwordJLabel;
-	JLabel passwordJLabel2;
+	JButton logonButton; //新建按钮
+	JTextField usernameField;//用户名输入框
+	JPasswordField passwordField;//密码输入框
+	JPasswordField passwordField2;//密码确认输入框
+	JLabel usernameJLabel;//用户名标签
+	JLabel passwordJLabel;//密码标签
+	JLabel passwordJLabel2;//密码确认标签
 	LogonJFrame (){
-		super("登录");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		super("新建");
+		//setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(225,400);
 		setLocationRelativeTo(null);
 		setLayout(null);
@@ -42,7 +42,7 @@ public class LogonJFrame extends JFrame{
 		passwordField.setFont(new Font(null, Font.PLAIN, 20));
 		add(passwordField);
 		passwordJLabel2=new JLabel("再次输入密码：");
-		passwordJLabel2.setBounds(10, 180, 100, 20);
+		passwordJLabel2.setBounds(10, 180, 150, 20);
 		passwordJLabel2.setFont(new Font(null, Font.PLAIN, 20));
 		add(passwordJLabel2);
 		passwordField2=new JPasswordField();
