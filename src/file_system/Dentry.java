@@ -1,7 +1,9 @@
 package file_system;
+
 import java.util.*;
 
 public class Dentry {
+	
 	private String dentryName;//目录名字
 	private String userName;//创建的用户名字
 	final int maxChildDentryNum=20; //子目录最大数量
@@ -78,11 +80,15 @@ public class Dentry {
 				file[i].fileDelete();
 			}
 		}
+		if (!parentDentry.getUserName().equals(userName)) {
+			FileSystem.deleteUser(userName);
+		}
 		dentryFlag = false;
 		parentDentry.decChildDentryNum();
 		parentDentry.setChangeTime();
 	}
 	
+
 	boolean fileCreate(String fileName) {//创建文件 
 		boolean judge = false;//返回值
 		StringBuffer fullPath = new StringBuffer();
@@ -184,4 +190,6 @@ public class Dentry {
 		}
 		return null;
 	}
+
+	 
 }

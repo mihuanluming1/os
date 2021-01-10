@@ -15,6 +15,7 @@ public class FileSystem {
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
 		users[0]=new MyUser("admin", "123");
+		rootDentry=new Dentry(users[0].getUserName());
 		login();
 		
 	}
@@ -26,6 +27,7 @@ public class FileSystem {
 	}
 	static void cdOrder(String currentPath) {
 		//currentPath=myJFrame.getCurrentPath().toString();
+		Dentry sourseDentry=currentDentry;
 		currentDentry=rootDentry;
 		boolean flag=true;
 		while (!currentPath.equals(currentDentry.getFullPath().toString())){
@@ -41,25 +43,34 @@ public class FileSystem {
 			if (flag)
 				break;
 		}
+		if (currentPath.equals("root"))
+			flag=false;
 		if (flag){
-			if (currentPath.equals("root")) {
-				JOptionPane.showMessageDialog(null, "没有权限访问系统根目录", "Error", JOptionPane.ERROR_MESSAGE); 
+			JOptionPane.showMessageDialog(null, "错误的地址信息", "Error", JOptionPane.ERROR_MESSAGE); 
+			currentDentry=sourseDentry;
+			myJFrame.repaintDetailPanel();
+		}
+		else{
+			if (currentUser.equals(currentDentry.getUserName())||FileSystem.checkAdmin(currentUser)) {
+				myJFrame.repaintDetailPanel();
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "错误的地址信息", "Error", JOptionPane.ERROR_MESSAGE); 
+				JOptionPane.showMessageDialog(null, "没有权限访问目标目录", "Error", JOptionPane.ERROR_MESSAGE); 
+				currentDentry=sourseDentry;
+				myJFrame.repaintDetailPanel();
 			}
 		}
-		else
-			myJFrame.repaintDetailPanel();
 	}
 	static void initPanel(String userName) {
 		if (checkAdmin(userName)) {
-			rootDentry=new Dentry(userName);
+			//rootDentry=new Dentry(userName);
+			currentUser=userName;
 			currentDentry=rootDentry;
 			myJFrame=new MyJFrame();
 		}
 		else {
-			rootDentry=getDentry(userName);
+			currentDentry=getDentry(userName);
+			currentUser=userName;
 			myJFrame=new MyJFrame();
 		}
 		//rootDentry=new Dentry();
@@ -70,13 +81,16 @@ public class FileSystem {
 		// TODO 自动生成的方法存根
 		return rootDentry.getChildDentry(userName);
 	}
-	public static String checkUser(String userName, String password) {
+	public static int checkUser(String userName, String password) {
 		for (int i=0;i<100;i++) {
-			if (users[i]!=null&&users[i].getFlag()&&users[i].checkUser(userName, password)) {
-				return users[i].getUserName();
+			if (users[i]!=null&&users[i].getFlag()) {
+				if (users[i].checkUser(userName, password)==0)
+					return 0;
+				else if (users[i].checkUser(userName, password)==1)
+					return 1;
 			}
 		}
-		return null;
+		return 2;
 		// TODO 自动生成的方法存根
 		
 	}
@@ -112,4 +126,13 @@ public class FileSystem {
 	public static void login() {
 		LoginJFrame loginJFrame=new LoginJFrame();
 	}
+	public static void deleteUser(String userName) {
+		// TODO 自动生成的方法存根
+		for (int i=0;i<100;i++) {
+			if (users[i]!=null&&users[i].getFlag()&&users[i].getUserName().equals(userName)) {
+				users[i].deleteUser();
+			}
+		}
+	}
+
 }

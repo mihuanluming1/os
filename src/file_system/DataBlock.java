@@ -1,6 +1,10 @@
 package file_system;
 
+import java.io.Serializable;
+
 public class DataBlock {
+		
+	
 		int dataBlockFlag;   //数据块是否被使用标志
 		StringBuffer array =new StringBuffer();
 		StringBuffer str =new StringBuffer(); //暂时记录

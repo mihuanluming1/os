@@ -1,7 +1,10 @@
 package file_system;
 
-class Inode {
-      int inodeNum;// 索引号
+import java.io.Serializable;
+
+class Inode  {
+     
+	int inodeNum;// 索引号
       int inodeFlag;  // 是否被使用
       DataBlock datablock;  //声明数据块子对象
       

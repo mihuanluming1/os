@@ -7,12 +7,20 @@ public class MyUser {
 	public MyUser(String userName,String password) {
 		this.userName=userName;
 		this.password=password;
+		//System.out.println(userName+"@");
 		userFlag=true;
 		// TODO 自动生成的构造函数存根
 		
 	}
-	boolean checkUser(String userName,String password) {
-		return this.userName.equals(userName)&&this.password.equals(password);
+	int checkUser(String userName,String password) {
+		//System.out.println(userName+"!");
+		if (this.userName.equals(userName)&&this.password.equals(password))
+			return 0;
+		else if (this.userName.equals(userName))
+			return 1;
+		else {
+			return 2;
+		}
 	}
 	void deleteUser() {
 		userFlag=false;

@@ -1,9 +1,10 @@
 package file_system;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.util.Scanner;
 
-public class MyFile {//文件类
+
+public class MyFile {
+
+//文件类
 	private String fileName;//文件名字
 	private StringBuffer fullPath;//文件所在目录，相对目录，只要父目录
 	private String userName;//用户名       

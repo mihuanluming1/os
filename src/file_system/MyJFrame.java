@@ -1,6 +1,10 @@
 package file_system;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 class MyJFrame extends JFrame{
@@ -8,7 +12,7 @@ class MyJFrame extends JFrame{
 	DetailJPanel detailJPanel;
 	static String frameNameString="文件系统";
 	static int frameHeight=720;
-	static int frameWidth=1280;
+	static int frameWidth=720;//1280;
 	public MyJFrame() {
 		// TODO 自动生成的构造函数存根
 		super(frameNameString);
@@ -17,12 +21,13 @@ class MyJFrame extends JFrame{
 		setSize(frameWidth,frameHeight);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		cmdJPanel=new CmdJPanel();
-		add(cmdJPanel);
+		//cmdJPanel=new CmdJPanel();
+		//add(cmdJPanel);
 		detailJPanel=new DetailJPanel();
 		add(detailJPanel);
 		setVisible(true);
 		repaint();
+	
 	}
 	public void repaintDetailPanel() {
 		// TODO 自动生成的方法存根
