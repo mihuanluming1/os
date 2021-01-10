@@ -1,40 +1,31 @@
 package file_system;
 
+import java.awt.Window;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class FileSystem {
-	private static Dentry currentDentry;
-	private static StringBuffer userName;
-	private static Dentry rootDentry;
-	private static MyJFrame myJFrame;
-	private static String currentPath;
+	private static Dentry currentDentry; //当前目录
+	private static Dentry rootDentry;    //根目录
+	private static MyUser [] users=new MyUser[100];  //用户
+	private static String currentUser;  //当前用户
+	private static MyJFrame myJFrame;  //文件系统界面
 	public static void main(String[] args) {
 		// TODO 自动生成的方法存根
-		rootDentry=new Dentry();
-		currentDentry=rootDentry;
-		myJFrame=new MyJFrame();
-		//currentDentry=new Dentry();
-		//System.out.println(current.getFullPath());
-		/*Dentry current;
-		Dentry root = new Dentry("root","20857");
-		root.dentryCreate("abc",root.getUserName(),root); 
-		current = root.getChildDentry(0);
-		System.out.println(current.getFullPath()); 
-		current.dentryCreate("sdf",current.getUserName(),current);
-		current = current.getChildDentry(0);
-		System.out.println (current.getFullPath()); 
-		current=root.getChildDentry(0).getChildDentry(0);
-		System.out.print(current.getFullPath());*/
+		users[0]=new MyUser("admin", "123"); //初始化管理员用户
+		rootDentry=new Dentry(users[0].getUserName());//初始化根目录
+		login();  //弹出登录界面
+		
 	}
-	static void setCurrentDentry(Dentry currentDentry) {
+	static void setCurrentDentry(Dentry currentDentry) { //设置当前目录
 		FileSystem.currentDentry=currentDentry;
 	}
-	static Dentry getCurrentDentry() {
+	static Dentry getCurrentDentry() {  //获取当前目录
 		return currentDentry;
 	}
-	static void cdOrder(String currentPath) {
-		//currentPath=myJFrame.getCurrentPath().toString();
+	static void cdOrder(String currentPath) {  //cd命令
+		Dentry sourseDentry=currentDentry;
 		currentDentry=rootDentry;
 		boolean flag=true;
 		while (!currentPath.equals(currentDentry.getFullPath().toString())){
@@ -50,16 +41,92 @@ public class FileSystem {
 			if (flag)
 				break;
 		}
+		if (currentPath.equals("root"))
+			flag=false;
 		if (flag){
-			if (currentPath.equals("root")) {
-				JOptionPane.showMessageDialog(null, "没有权限访问系统根目录", "Error", JOptionPane.ERROR_MESSAGE); 
+			JOptionPane.showMessageDialog(null, "错误的地址信息", "Error", JOptionPane.ERROR_MESSAGE); 
+			currentDentry=sourseDentry;
+			myJFrame.repaintDetailPanel();
+		}
+		else{
+			if (currentUser.equals(currentDentry.getUserName())||FileSystem.checkAdmin(currentUser)) {
+				myJFrame.repaintDetailPanel();
 			}
 			else {
-				JOptionPane.showMessageDialog(null, "错误的地址信息", "Error", JOptionPane.ERROR_MESSAGE); 
+				JOptionPane.showMessageDialog(null, "没有权限访问目标目录", "Error", JOptionPane.ERROR_MESSAGE); 
+				currentDentry=sourseDentry;
+				myJFrame.repaintDetailPanel();
 			}
 		}
-		else
-			myJFrame.repaintDetailPanel();
+	}
+	static void initPanel(String userName) {  //初始化文件系统界面
+		if (checkAdmin(userName)) {
+			currentUser=userName;
+			currentDentry=rootDentry;
+			myJFrame=new MyJFrame();
+		}
+		else {
+			currentDentry=getDentry(userName);
+			currentUser=userName;
+			myJFrame=new MyJFrame();
+		}
+	}
+	private static Dentry getDentry(String userName) {  //获取根目录下的子目录
+		// TODO 自动生成的方法存根
+		return rootDentry.getChildDentry(userName);
+	}
+	public static int checkUser(String userName, String password) {  //检查用户是否合法
+		for (int i=0;i<100;i++) {
+			if (users[i]!=null&&users[i].getFlag()) {
+				if (users[i].checkUser(userName, password)==0)
+					return 0;
+				else if (users[i].checkUser(userName, password)==1)
+					return 1;
+			}
+		}
+		return 2;
+		// TODO 自动生成的方法存根
+		
+	}
+	public static boolean checkAdmin(String userName) { //检查用户是否为管理员
+		return users[0].getUserName().equals(userName);
+		
+	}
+	public static boolean checkUserName(String userName) { //检查用户名是否存在
+		// TODO 自动生成的方法存根
+		for (int i=0;i<100;i++) {
+			if (users[i]!=null&&users[i].getFlag()&&users[i].getUserName().equals(userName)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	public static void createUser(String userName, String password) { //创建用户
+		// TODO 自动生成的方法存根
+		for (int i=0;i<100;i++) {
+			if (users[i]==null||!users[i].getFlag()) {
+				users[i]=new MyUser(userName, password);
+				rootDentry.dentryCreate(userName, userName, rootDentry);
+				myJFrame.repaintDetailPanel();
+				break;
+			}
+		}
+		
+	}
+	public static MyJFrame getJFrame() {  //获取文件系统界面对象
+		// TODO 自动生成的方法存根
+		return myJFrame;
+	}
+	public static void login() {  //进入登录界面
+		LoginJFrame loginJFrame=new LoginJFrame();
+	}
+	public static void deleteUser(String userName) { //删除用户
+		// TODO 自动生成的方法存根
+		for (int i=0;i<100;i++) {
+			if (users[i]!=null&&users[i].getFlag()&&users[i].getUserName().equals(userName)) {
+				users[i].deleteUser();
+			}
+		}
 	}
 
 }
