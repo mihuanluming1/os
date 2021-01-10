@@ -8,8 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 class MyJFrame extends JFrame{
-	CmdJPanel cmdJPanel;
-	DetailJPanel detailJPanel;
+	DetailJPanel detailJPanel; //显示详细信息的界面
 	static String frameNameString="文件系统";
 	static int frameHeight=720;
 	static int frameWidth=720;//1280;
@@ -21,15 +20,13 @@ class MyJFrame extends JFrame{
 		setSize(frameWidth,frameHeight);
 		setLocationRelativeTo(null);
 		setLayout(null);
-		//cmdJPanel=new CmdJPanel();
-		//add(cmdJPanel);
 		detailJPanel=new DetailJPanel();
 		add(detailJPanel);
 		setVisible(true);
 		repaint();
 	
 	}
-	public void repaintDetailPanel() {
+	public void repaintDetailPanel() { //刷新界面
 		// TODO 自动生成的方法存根
 		detailJPanel.repaintGridPanel();
 		

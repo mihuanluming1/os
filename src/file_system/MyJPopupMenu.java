@@ -160,7 +160,6 @@ public class MyJPopupMenu extends JPopupMenu{
 				if (e.getButton()==e.BUTTON1) {
 					//delete();
 					currentDentry.fileDelete(file.getFileName());
-					//file.fileDelete();
 					gridJPanel.showFile();
 				}
 			}

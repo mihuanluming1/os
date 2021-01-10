@@ -8,7 +8,7 @@ import javax.swing.JTextPane;
 
 public class DetailJFrame extends JFrame{
 
-	public DetailJFrame(Dentry currentDentry) {
+	public DetailJFrame(Dentry currentDentry) {//显示目录详细信息
 		// TODO 自动生成的构造函数存根
 		super("详细信息");
 		setSize(400,300);
@@ -27,7 +27,7 @@ public class DetailJFrame extends JFrame{
 		repaint();
 	}
 
-	public DetailJFrame(MyFile file) {
+	public DetailJFrame(MyFile file) {//显示文件详细信息
 		// TODO 自动生成的构造函数存根
 		super("详细信息");
 		setSize(400,300);

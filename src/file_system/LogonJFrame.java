@@ -12,13 +12,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class LogonJFrame extends JFrame{
-	JButton logonButton;
-	JTextField usernameField;
-	JPasswordField passwordField;
-	JPasswordField passwordField2;
-	JLabel usernameJLabel;
-	JLabel passwordJLabel;
-	JLabel passwordJLabel2;
+	JButton logonButton; //新建按钮
+	JTextField usernameField;//用户名输入框
+	JPasswordField passwordField;//密码输入框
+	JPasswordField passwordField2;//密码确认输入框
+	JLabel usernameJLabel;//用户名标签
+	JLabel passwordJLabel;//密码标签
+	JLabel passwordJLabel2;//密码确认标签
 	LogonJFrame (){
 		super("新建");
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
